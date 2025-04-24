@@ -1,0 +1,40 @@
+﻿<Properties StartupConfiguration="{27AB3609-15DB-52E3-4D4E-5A489B4C4689}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/DesignCommentary.cs">
+    <Files>
+      <File FileName="Assets/MiLabCardboardExtension/Scripts/XRCardboard/XRCardboardReticle.cs" Line="64" Column="1" IsPinned="True" />
+      <File FileName="Library/PackageCache/com.google.xr.cardboard/Runtime/Api.cs" />
+      <File FileName="Assets/MiLabCardboardExtension/Scripts/XRCardboard/XRCardboardStartup.cs" />
+      <File FileName="Assets/MiLabCardboardExtension/Scripts/XRCardboard/XRCardboardInputModule.cs" />
+      <File FileName="Assets/ObjectMenuSpawner.cs" />
+      <File FileName="Assets/ReticlePointer.cs" />
+      <File FileName="Assets/OutlineSelection.cs" />
+      <File FileName="Assets/ActionButtonHandler.cs" />
+      <File FileName="Assets/MiLabCardboardExtension/Scripts/CharacterMovement.cs" />
+      <File FileName="Assets/Teleportation.cs" />
+      <File FileName="Assets/DesignCommentary.cs" Line="93" Column="29" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="My project (3)" expanded="True">
+            <Node name="Assets" expanded="True" selected="True">
+              <Node name="MiLabCardboardExtension" expanded="True">
+                <Node name="Scripts" expanded="True">
+                  <Node name="XRCardboard" expanded="True" />
+                </Node>
+                <Node name="Shaders" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="2c115b09-e515-4ea0-bc9b-eebef8505e02" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

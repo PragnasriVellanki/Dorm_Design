@@ -1,0 +1,295 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Drom Design\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{DC968A2A-B4A4-0789-625B-A541BA9A630B}|Assembly-CSharp.csproj|d:\\drom design\\assets\\startscreenvrmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DC968A2A-B4A4-0789-625B-A541BA9A630B}|Assembly-CSharp.csproj|solutionrelative:assets\\startscreenvrmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DC968A2A-B4A4-0789-625B-A541BA9A630B}|Assembly-CSharp.csproj|D:\\Drom Design\\assets\\photonconnectionmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DC968A2A-B4A4-0789-625B-A541BA9A630B}|Assembly-CSharp.csproj|solutionrelative:assets\\photonconnectionmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DC968A2A-B4A4-0789-625B-A541BA9A630B}|Assembly-CSharp.csproj|D:\\Drom Design\\assets\\dormdesignspawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DC968A2A-B4A4-0789-625B-A541BA9A630B}|Assembly-CSharp.csproj|solutionrelative:assets\\dormdesignspawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DC968A2A-B4A4-0789-625B-A541BA9A630B}|Assembly-CSharp.csproj|D:\\Drom Design\\assets\\objectmenuspawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DC968A2A-B4A4-0789-625B-A541BA9A630B}|Assembly-CSharp.csproj|solutionrelative:assets\\objectmenuspawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DC968A2A-B4A4-0789-625B-A541BA9A630B}|Assembly-CSharp.csproj|D:\\Drom Design\\assets\\inventoryuimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DC968A2A-B4A4-0789-625B-A541BA9A630B}|Assembly-CSharp.csproj|solutionrelative:assets\\inventoryuimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DC968A2A-B4A4-0789-625B-A541BA9A630B}|Assembly-CSharp.csproj|D:\\Drom Design\\assets\\actionbuttonhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DC968A2A-B4A4-0789-625B-A541BA9A630B}|Assembly-CSharp.csproj|solutionrelative:assets\\actionbuttonhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AA15628F-BCE3-A2DA-D5AC-3A391F19AAC8}|PhotonUnityNetworking.Demos.csproj|D:\\Drom Design\\assets\\photon\\photonunitynetworking\\demos\\punbasics-tutorial\\scripts\\playermanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AA15628F-BCE3-A2DA-D5AC-3A391F19AAC8}|PhotonUnityNetworking.Demos.csproj|solutionrelative:assets\\photon\\photonunitynetworking\\demos\\punbasics-tutorial\\scripts\\playermanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DC968A2A-B4A4-0789-625B-A541BA9A630B}|Assembly-CSharp.csproj|D:\\Drom Design\\assets\\teleportation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DC968A2A-B4A4-0789-625B-A541BA9A630B}|Assembly-CSharp.csproj|solutionrelative:assets\\teleportation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DC968A2A-B4A4-0789-625B-A541BA9A630B}|Assembly-CSharp.csproj|D:\\Drom Design\\assets\\outlineselection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DC968A2A-B4A4-0789-625B-A541BA9A630B}|Assembly-CSharp.csproj|solutionrelative:assets\\outlineselection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DC968A2A-B4A4-0789-625B-A541BA9A630B}|Assembly-CSharp.csproj|D:\\Drom Design\\assets\\inventorymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DC968A2A-B4A4-0789-625B-A541BA9A630B}|Assembly-CSharp.csproj|solutionrelative:assets\\inventorymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DC968A2A-B4A4-0789-625B-A541BA9A630B}|Assembly-CSharp.csproj|D:\\Drom Design\\assets\\objecticon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DC968A2A-B4A4-0789-625B-A541BA9A630B}|Assembly-CSharp.csproj|solutionrelative:assets\\objecticon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DC968A2A-B4A4-0789-625B-A541BA9A630B}|Assembly-CSharp.csproj|D:\\Drom Design\\assets\\objectthumbnail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DC968A2A-B4A4-0789-625B-A541BA9A630B}|Assembly-CSharp.csproj|solutionrelative:assets\\objectthumbnail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DC968A2A-B4A4-0789-625B-A541BA9A630B}|Assembly-CSharp.csproj|D:\\Drom Design\\assets\\reticlepointer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DC968A2A-B4A4-0789-625B-A541BA9A630B}|Assembly-CSharp.csproj|solutionrelative:assets\\reticlepointer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DC968A2A-B4A4-0789-625B-A541BA9A630B}|Assembly-CSharp.csproj|D:\\Drom Design\\assets\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DC968A2A-B4A4-0789-625B-A541BA9A630B}|Assembly-CSharp.csproj|solutionrelative:assets\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Drom Design\\Assets\\LaunchManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\LaunchManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Drom Design\\Assets\\ConnectToServer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\ConnectToServer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Drom Design\\Assets\\VRMultiplayerPlayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\VRMultiplayerPlayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DormDesignSpawner.cs",
+              "DocumentMoniker": "D:\\Drom Design\\Assets\\DormDesignSpawner.cs",
+              "RelativeDocumentMoniker": "Assets\\DormDesignSpawner.cs",
+              "ToolTip": "D:\\Drom Design\\Assets\\DormDesignSpawner.cs",
+              "RelativeToolTip": "Assets\\DormDesignSpawner.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-21T20:47:48.833Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PhotonConnectionManager.cs",
+              "DocumentMoniker": "D:\\Drom Design\\Assets\\PhotonConnectionManager.cs",
+              "RelativeDocumentMoniker": "Assets\\PhotonConnectionManager.cs",
+              "ToolTip": "D:\\Drom Design\\Assets\\PhotonConnectionManager.cs",
+              "RelativeToolTip": "Assets\\PhotonConnectionManager.cs",
+              "ViewState": "AgIAACAAAAAAAAAAAAAcwDgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-21T20:16:14.73Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "StartScreenVRMenu.cs",
+              "DocumentMoniker": "D:\\Drom Design\\Assets\\StartScreenVRMenu.cs",
+              "RelativeDocumentMoniker": "Assets\\StartScreenVRMenu.cs",
+              "ToolTip": "D:\\Drom Design\\Assets\\StartScreenVRMenu.cs",
+              "RelativeToolTip": "Assets\\StartScreenVRMenu.cs",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAqwD4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-21T19:01:30.208Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "VRMultiplayerPlayer.cs",
+              "DocumentMoniker": "D:\\Drom Design\\Assets\\VRMultiplayerPlayer.cs",
+              "RelativeDocumentMoniker": "Assets\\VRMultiplayerPlayer.cs",
+              "ToolTip": "D:\\Drom Design\\Assets\\VRMultiplayerPlayer.cs",
+              "RelativeToolTip": "Assets\\VRMultiplayerPlayer.cs",
+              "ViewState": "AgIAAIAAAAAAAAAAAAAzwKwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T18:41:23.58Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "PlayerManager.cs",
+              "DocumentMoniker": "D:\\Drom Design\\Assets\\Photon\\PhotonUnityNetworking\\Demos\\PunBasics-Tutorial\\Scripts\\PlayerManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Photon\\PhotonUnityNetworking\\Demos\\PunBasics-Tutorial\\Scripts\\PlayerManager.cs",
+              "ToolTip": "D:\\Drom Design\\Assets\\Photon\\PhotonUnityNetworking\\Demos\\PunBasics-Tutorial\\Scripts\\PlayerManager.cs",
+              "RelativeToolTip": "Assets\\Photon\\PhotonUnityNetworking\\Demos\\PunBasics-Tutorial\\Scripts\\PlayerManager.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAAAoAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T18:39:02.024Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "LaunchManager.cs",
+              "DocumentMoniker": "D:\\Drom Design\\Assets\\LaunchManager.cs",
+              "RelativeDocumentMoniker": "Assets\\LaunchManager.cs",
+              "ToolTip": "D:\\Drom Design\\Assets\\LaunchManager.cs",
+              "RelativeToolTip": "Assets\\LaunchManager.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAgwAUAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T18:33:24.541Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "ConnectToServer.cs",
+              "DocumentMoniker": "D:\\Drom Design\\Assets\\ConnectToServer.cs",
+              "RelativeDocumentMoniker": "Assets\\ConnectToServer.cs",
+              "ToolTip": "D:\\Drom Design\\Assets\\ConnectToServer.cs",
+              "RelativeToolTip": "Assets\\ConnectToServer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T18:23:49.882Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Teleportation.cs",
+              "DocumentMoniker": "D:\\Drom Design\\Assets\\Teleportation.cs",
+              "RelativeDocumentMoniker": "Assets\\Teleportation.cs",
+              "ToolTip": "D:\\Drom Design\\Assets\\Teleportation.cs",
+              "RelativeToolTip": "Assets\\Teleportation.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAACIAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T02:47:48.889Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "OutlineSelection.cs",
+              "DocumentMoniker": "D:\\Drom Design\\Assets\\OutlineSelection.cs",
+              "RelativeDocumentMoniker": "Assets\\OutlineSelection.cs",
+              "ToolTip": "D:\\Drom Design\\Assets\\OutlineSelection.cs",
+              "RelativeToolTip": "Assets\\OutlineSelection.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T00:38:20.69Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ObjectIcon.cs",
+              "DocumentMoniker": "D:\\Drom Design\\Assets\\ObjectIcon.cs",
+              "RelativeDocumentMoniker": "Assets\\ObjectIcon.cs",
+              "ToolTip": "D:\\Drom Design\\Assets\\ObjectIcon.cs",
+              "RelativeToolTip": "Assets\\ObjectIcon.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAA3wCYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T00:21:16.201Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ActionButtonHandler.cs",
+              "DocumentMoniker": "D:\\Drom Design\\Assets\\ActionButtonHandler.cs",
+              "RelativeDocumentMoniker": "Assets\\ActionButtonHandler.cs",
+              "ToolTip": "D:\\Drom Design\\Assets\\ActionButtonHandler.cs",
+              "RelativeToolTip": "Assets\\ActionButtonHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACkAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-12T20:15:38.032Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ObjectMenuSpawner.cs",
+              "DocumentMoniker": "D:\\Drom Design\\Assets\\ObjectMenuSpawner.cs",
+              "RelativeDocumentMoniker": "Assets\\ObjectMenuSpawner.cs",
+              "ToolTip": "D:\\Drom Design\\Assets\\ObjectMenuSpawner.cs",
+              "RelativeToolTip": "Assets\\ObjectMenuSpawner.cs",
+              "ViewState": "AgIAAEABAAAAAAAAAAAcwFABAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-12T20:14:04.792Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ObjectThumbnail.cs",
+              "DocumentMoniker": "D:\\Drom Design\\Assets\\ObjectThumbnail.cs",
+              "RelativeDocumentMoniker": "Assets\\ObjectThumbnail.cs",
+              "ToolTip": "D:\\Drom Design\\Assets\\ObjectThumbnail.cs",
+              "RelativeToolTip": "Assets\\ObjectThumbnail.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-12T19:56:13.183Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "PlayerController.cs",
+              "DocumentMoniker": "D:\\Drom Design\\Assets\\PlayerController.cs",
+              "RelativeDocumentMoniker": "Assets\\PlayerController.cs",
+              "ToolTip": "D:\\Drom Design\\Assets\\PlayerController.cs",
+              "RelativeToolTip": "Assets\\PlayerController.cs",
+              "ViewState": "AgIAACgAAAAAAAAAAAAiwD4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-12T19:54:57.884Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "ReticlePointer.cs",
+              "DocumentMoniker": "D:\\Drom Design\\Assets\\ReticlePointer.cs",
+              "RelativeDocumentMoniker": "Assets\\ReticlePointer.cs",
+              "ToolTip": "D:\\Drom Design\\Assets\\ReticlePointer.cs",
+              "RelativeToolTip": "Assets\\ReticlePointer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-12T19:52:10.741Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "InventoryManager.cs",
+              "DocumentMoniker": "D:\\Drom Design\\Assets\\InventoryManager.cs",
+              "RelativeDocumentMoniker": "Assets\\InventoryManager.cs",
+              "ToolTip": "D:\\Drom Design\\Assets\\InventoryManager.cs",
+              "RelativeToolTip": "Assets\\InventoryManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-12T19:51:00.517Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "InventoryUIManager.cs",
+              "DocumentMoniker": "D:\\Drom Design\\Assets\\InventoryUIManager.cs",
+              "RelativeDocumentMoniker": "Assets\\InventoryUIManager.cs",
+              "ToolTip": "D:\\Drom Design\\Assets\\InventoryUIManager.cs",
+              "RelativeToolTip": "Assets\\InventoryUIManager.cs",
+              "ViewState": "AgIAAL0AAAAAAAAAAAAUwM0AAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-12T19:42:34.547Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
