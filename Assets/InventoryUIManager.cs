@@ -12,7 +12,6 @@ public class InventoryUIManager : MonoBehaviour
     public int inventorySize = 20;
 
     [Header("Cameras")]
-    public Camera mainCamera;
     public Camera inventoryCamera;
 
     private List<GameObject> items = new List<GameObject>();
@@ -28,7 +27,6 @@ public class InventoryUIManager : MonoBehaviour
 
     void Start()
     {
-        // ✅ Fully hide inventory panel and disable inventory camera
         if (inventoryPanel != null)
         {
             inventoryPanel.SetActive(false);
@@ -37,7 +35,7 @@ public class InventoryUIManager : MonoBehaviour
 
         if (inventoryCamera != null)
         {
-            inventoryCamera.enabled = false;
+            inventoryCamera.enabled = true;
             inventoryCamera.cullingMask = LayerMask.GetMask("InventoryOnly");
         }
 
@@ -46,16 +44,16 @@ public class InventoryUIManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.JoystickButton7) || Input.GetKeyDown(KeyCode.JoystickButton4))
+        if (Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.JoystickButton7))
         {
             ToggleInventory();
         }
 
         if (!inventoryOpen) return;
 
-        HandleJoystickNavigation();
+        HandleJoystickAndKeyboardNavigation();
 
-        if (Input.GetKeyDown(KeyCode.JoystickButton10))
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.JoystickButton10))
         {
             SelectCurrentItem();
         }
@@ -68,17 +66,12 @@ public class InventoryUIManager : MonoBehaviour
         if (inventoryOpen)
         {
             inventoryPanel?.SetActive(true);
-            inventoryCamera.enabled = true;
-            if (mainCamera != null) mainCamera.enabled = false;
-
             PositionInventoryPanel();
             HighlightInventorySlot(inventoryIndex);
         }
         else
         {
             inventoryPanel?.SetActive(false);
-            if (mainCamera != null) mainCamera.enabled = true;
-            inventoryCamera.enabled = false;
         }
 
         RefreshSlots();
@@ -89,7 +82,6 @@ public class InventoryUIManager : MonoBehaviour
         if (inventoryPanel == null || inventoryCamera == null) return;
 
         Transform cam = inventoryCamera.transform;
-
         Vector3 forwardOffset = cam.forward * 4f;
         Vector3 newPos = cam.position + forwardOffset;
         inventoryPanel.transform.position = newPos;
@@ -98,7 +90,6 @@ public class InventoryUIManager : MonoBehaviour
         lookDir.y = 0;
         inventoryPanel.transform.rotation = Quaternion.LookRotation(lookDir);
 
-        // ✅ Ensure inventoryPanel and children are on InventoryOnly layer
         SetLayerRecursive(inventoryPanel, LayerMask.NameToLayer("InventoryOnly"));
     }
 
@@ -111,27 +102,33 @@ public class InventoryUIManager : MonoBehaviour
         }
     }
 
-    private void HandleJoystickNavigation()
+    private void HandleJoystickAndKeyboardNavigation()
     {
         float vertical = Input.GetAxis("Vertical");
         float horizontal = Input.GetAxis("Horizontal");
 
-        if (!joystickInputReady || (Mathf.Abs(vertical) < 0.5f && Mathf.Abs(horizontal) < 0.5f)) return;
+        bool arrowUp = Input.GetKeyDown(KeyCode.UpArrow);
+        bool arrowDown = Input.GetKeyDown(KeyCode.DownArrow);
+        bool arrowLeft = Input.GetKeyDown(KeyCode.LeftArrow);
+        bool arrowRight = Input.GetKeyDown(KeyCode.RightArrow);
+
+        if (!joystickInputReady) return;
 
         int cols = 5;
         int x = inventoryIndex % cols;
         int y = inventoryIndex / cols;
 
-        if (horizontal > 0) x++;
-        if (horizontal < 0) x--;
-        if (vertical > 0) y--;
-        if (vertical < 0) y++;
+        if (horizontal > 0.5f || arrowRight) x++;
+        if (horizontal < -0.5f || arrowLeft) x--;
+        if (vertical > 0.5f || arrowUp) y--;
+        if (vertical < -0.5f || arrowDown) y++;
 
         x = Mathf.Clamp(x, 0, cols - 1);
         y = Mathf.Clamp(y, 0, (inventorySize / cols) - 1);
         inventoryIndex = Mathf.Clamp(y * cols + x, 0, inventorySize - 1);
 
         HighlightInventorySlot(inventoryIndex);
+
         joystickInputReady = false;
         Invoke(nameof(ResetJoystickInput), 0.2f);
     }
@@ -141,7 +138,7 @@ public class InventoryUIManager : MonoBehaviour
         joystickInputReady = true;
     }
 
-    void HighlightInventorySlot(int index)
+    private void HighlightInventorySlot(int index)
     {
         for (int i = 0; i < slotButtons.Count; i++)
         {
@@ -150,11 +147,10 @@ public class InventoryUIManager : MonoBehaviour
                 img.color = (i == index) ? Color.yellow : Color.white;
         }
     }
+
     public void HideInventoryPanel()
     {
         inventoryPanel.SetActive(false);
-
-        // Reset all highlights
         for (int i = 0; i < slotButtons.Count; i++)
         {
             Image img = slotButtons[i].GetComponent<Image>();
@@ -162,7 +158,6 @@ public class InventoryUIManager : MonoBehaviour
                 img.color = Color.white;
         }
     }
-
 
     public void HighlightSlotByMouse(int index)
     {
@@ -176,7 +171,7 @@ public class InventoryUIManager : MonoBehaviour
 
         for (int i = 0; i < slotButtons.Count; i++)
         {
-            if (slotButtons[i] == null) continue; // ✅ Null safety
+            if (slotButtons[i] == null) continue;
 
             ObjectIcon icon = slotButtons[i].GetComponent<ObjectIcon>();
 
@@ -200,7 +195,7 @@ public class InventoryUIManager : MonoBehaviour
 
         GameObject selectedItem = items[inventoryIndex];
 
-        InventoryManager.Instance.RemoveObject(inventoryIndex); // 🔁 Remove BEFORE activating
+        InventoryManager.Instance.RemoveObject(inventoryIndex);
 
         selectedItem.SetActive(true);
         selectedItem.tag = "Selectable";
@@ -208,5 +203,4 @@ public class InventoryUIManager : MonoBehaviour
 
         RefreshSlots();
     }
-
 }

@@ -66,6 +66,7 @@
     <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\AppSettingsExtensions.cs" />
     <Compile Include="Assets\ObjectThumbnail.cs" />
     <Compile Include="Assets\MiLabCardboardExtension\Scripts\UnityFloatEvent.cs" />
+    <Compile Include="Assets\Free Wood Door Pack\Script\Door.cs" />
     <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\ChannelSelector.cs" />
     <Compile Include="Assets\QuickOutline\Scripts\Outline.cs" />
     <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\FriendItem.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Assets\ActionButtonHandler.cs" />
     <Compile Include="Assets\MiLabCardboardExtension\Scripts\XRCardboard\XRCardboardController.cs" />
     <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\ChatAppIdCheckerUI.cs" />
+    <Compile Include="Assets\Free Wood Door Pack\Script\FPSController.cs" />
     <Compile Include="Assets\InventoryUIManager.cs" />
     <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\NamePickGui.cs" />
     <Compile Include="Assets\DormDesignSpawner.cs" />
@@ -86,12 +88,14 @@
     <Compile Include="Assets\Teleportation.cs" />
     <Compile Include="Assets\Photon\PhotonChat\Demos\Common\TextToggleIsOnTransition.cs" />
     <Compile Include="Assets\OutlineSelection.cs" />
+    <Compile Include="Assets\AdvancedInventoryManager.cs" />
     <Compile Include="Assets\ReticlePointer.cs" />
     <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\IgnoreUiRaycastWhenInactive.cs" />
     <Compile Include="Assets\MiLabCardboardExtension\Scripts\XRCardboard\XRCardboardInputSettings.cs" />
     <Compile Include="Assets\PlayerController.cs" />
     <Compile Include="Assets\MiLabCardboardExtension\Scripts\CameraPointer.cs" />
     <Compile Include="Assets\Photon\PhotonChat\Demos\Common\OnStartDelete.cs" />
+    <Compile Include="Assets\Free Wood Door Pack\Script\CameraOpenDoor.cs" />
     <Compile Include="Assets\MiLabCardboardExtension\Scripts\MapBlueToothKey.cs" />
     <Compile Include="Assets\MiLabCardboardExtension\Scripts\CharacterMovement.cs" />
     <Compile Include="Assets\ObjectMenuSpawner.cs" />
