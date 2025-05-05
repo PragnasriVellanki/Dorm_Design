@@ -602,11 +602,8 @@ namespace Photon.Realtime
 
         /// <summary>Defines if this client sends telemetry / analytics about how the connection ends.</summary>
         public bool TelemetryEnabled = false;
-
         /// <summary>Tells us if "this session" was already reported. We want to send only one report in best case. Re-set on connect.</summary>
-        #pragma warning disable CS0414
         private bool telemetrySent = false;
-        #pragma warning restore CS0414
 
 
         /// <summary>

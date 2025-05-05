@@ -12,11 +12,11 @@ EditorBuildSettings:
     path: Assets/MiLabCardboardExtension/Scenes/Map Bluetooth Key.unity
     guid: 1eb807ac90408844da5fd17e087fea1e
   - enabled: 1
-    path: Assets/Scenes/DormDesign.unity
-    guid: b60b747b12b35284298e26e0d68ec4dc
-  - enabled: 1
     path: Assets/Scenes/Startscreen.unity
     guid: 26e05824954fd154c9f0df71cc22c935
+  - enabled: 1
+    path: Assets/Scenes/DormDesign.unity
+    guid: b60b747b12b35284298e26e0d68ec4dc
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 525ea2b772fdf426280b9f1f4a87d614, type: 2}

@@ -15,10 +15,6 @@ namespace ExitGames.Client.Photon
 {
     using System;
 
-    #if UNITY_2019_3_OR_NEWER
-    using UnityEngine.Scripting;
-    #endif
-
     /// <summary>
     /// Internal class to encapsulate the network i/o functionality for the realtime library.
     /// </summary>
