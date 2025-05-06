@@ -3,88 +3,20 @@
   "WorkspaceRootPath": "D:\\DromDesign\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{386C9597-341C-7709-9455-D624B62F545A}|Assembly-CSharp.csproj|d:\\dromdesign\\assets\\scripts\\teleportdoor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{386C9597-341C-7709-9455-D624B62F545A}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\teleportdoor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{386C9597-341C-7709-9455-D624B62F545A}|Assembly-CSharp.csproj|D:\\DromDesign\\assets\\scripts\\advancedinventorymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{386C9597-341C-7709-9455-D624B62F545A}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\advancedinventorymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{386C9597-341C-7709-9455-D624B62F545A}|Assembly-CSharp.csproj|D:\\DromDesign\\assets\\scripts\\teleportdoormanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{386C9597-341C-7709-9455-D624B62F545A}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\teleportdoormanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{386C9597-341C-7709-9455-D624B62F545A}|Assembly-CSharp.csproj|d:\\dromdesign\\assets\\scripts\\advancedinventoryuicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{386C9597-341C-7709-9455-D624B62F545A}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\advancedinventoryuicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\DromDesign\\Assets\\AdvancedInventoryManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\AdvancedInventoryManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{386C9597-341C-7709-9455-D624B62F545A}|Assembly-CSharp.csproj|d:\\dromdesign\\assets\\scripts\\objectmenuspawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{386C9597-341C-7709-9455-D624B62F545A}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\objectmenuspawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C46DA697-ABF6-872C-167E-BCA1E0686370}|PhotonUnityNetworking.Demos.csproj|D:\\DromDesign\\assets\\photon\\photonunitynetworking\\demos\\demoslotracer\\scripts\\playercontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C46DA697-ABF6-872C-167E-BCA1E0686370}|PhotonUnityNetworking.Demos.csproj|solutionrelative:assets\\photon\\photonunitynetworking\\demos\\demoslotracer\\scripts\\playercontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5B90B406-2FA8-A346-6DA5-575374DFF1DA}|PhotonVoice.PUN.csproj|D:\\DromDesign\\assets\\photon\\photonvoice\\code\\pun\\photonvoice.pun.asmdef||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{5B90B406-2FA8-A346-6DA5-575374DFF1DA}|PhotonVoice.PUN.csproj|solutionrelative:assets\\photon\\photonvoice\\code\\pun\\photonvoice.pun.asmdef||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5B90B406-2FA8-A346-6DA5-575374DFF1DA}|PhotonVoice.PUN.csproj|D:\\DromDesign\\assets\\photon\\photonvoice\\code\\pun\\photonvoiceview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5B90B406-2FA8-A346-6DA5-575374DFF1DA}|PhotonVoice.PUN.csproj|solutionrelative:assets\\photon\\photonvoice\\code\\pun\\photonvoiceview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\DromDesign\\Assets\\InventoryUIManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\InventoryUIManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\DromDesign\\Assets\\ObjectIcon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\ObjectIcon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\DromDesign\\Assets\\Free Wood Door Pack\\Script\\Door.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Free Wood Door Pack\\Script\\Door.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\DromDesign\\Assets\\InventoryCategoryButton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\InventoryCategoryButton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\DromDesign\\Assets\\ActionButtonHandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\ActionButtonHandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\DromDesign\\Assets\\DormDesignSpawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\DormDesignSpawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\DromDesign\\Assets\\TeleportDoor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\TeleportDoor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\DromDesign\\Assets\\TeleportDoorManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\TeleportDoorManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\DromDesign\\Assets\\Teleportation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\Teleportation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\DromDesign\\Assets\\PlayerSync.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\PlayerSync.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\DromDesign\\Assets\\PlayerController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\PlayerController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\DromDesign\\Assets\\PhotonConnectionManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\PhotonConnectionManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\DromDesign\\Assets\\StartScreenVRMenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\StartScreenVRMenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\DromDesign\\Assets\\ObjectThumbnail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\ObjectThumbnail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\DromDesign\\Assets\\AdvancedInventoryUIController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\AdvancedInventoryUIController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{386C9597-341C-7709-9455-D624B62F545A}|Assembly-CSharp.csproj|D:\\DromDesign\\assets\\scripts\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{386C9597-341C-7709-9455-D624B62F545A}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -94,258 +26,58 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "TeleportDoor.cs",
-              "DocumentMoniker": "D:\\DromDesign\\Assets\\Scripts\\TeleportDoor.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\TeleportDoor.cs",
-              "ToolTip": "D:\\DromDesign\\Assets\\Scripts\\TeleportDoor.cs",
-              "RelativeToolTip": "Assets\\Scripts\\TeleportDoor.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "AdvancedInventoryUIController.cs",
+              "DocumentMoniker": "D:\\DromDesign\\Assets\\Scripts\\AdvancedInventoryUIController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\AdvancedInventoryUIController.cs",
+              "ToolTip": "D:\\DromDesign\\Assets\\Scripts\\AdvancedInventoryUIController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\AdvancedInventoryUIController.cs",
+              "ViewState": "AgIAAHYAAAAAAAAAAAAkwIQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-05T03:51:42.091Z",
+              "WhenOpened": "2025-05-06T18:33:44.849Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "TeleportDoorManager.cs",
-              "DocumentMoniker": "D:\\DromDesign\\Assets\\Scripts\\TeleportDoorManager.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\TeleportDoorManager.cs",
-              "ToolTip": "D:\\DromDesign\\Assets\\Scripts\\TeleportDoorManager.cs",
-              "RelativeToolTip": "Assets\\Scripts\\TeleportDoorManager.cs",
-              "ViewState": "AgIAAB0AAAAAAAAAAAAIwDMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-05T03:26:00.841Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "PlayerControl.cs",
-              "DocumentMoniker": "D:\\DromDesign\\Assets\\Photon\\PhotonUnityNetworking\\Demos\\DemoSlotRacer\\Scripts\\PlayerControl.cs",
-              "RelativeDocumentMoniker": "Assets\\Photon\\PhotonUnityNetworking\\Demos\\DemoSlotRacer\\Scripts\\PlayerControl.cs",
-              "ToolTip": "D:\\DromDesign\\Assets\\Photon\\PhotonUnityNetworking\\Demos\\DemoSlotRacer\\Scripts\\PlayerControl.cs",
-              "RelativeToolTip": "Assets\\Photon\\PhotonUnityNetworking\\Demos\\DemoSlotRacer\\Scripts\\PlayerControl.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAxwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-05T00:38:05.756Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "InventoryCategoryButton.cs",
-              "DocumentMoniker": "D:\\DromDesign\\Assets\\InventoryCategoryButton.cs",
-              "RelativeDocumentMoniker": "Assets\\InventoryCategoryButton.cs",
-              "ToolTip": "D:\\DromDesign\\Assets\\InventoryCategoryButton.cs",
-              "RelativeToolTip": "Assets\\InventoryCategoryButton.cs",
-              "ViewState": "AgIAADEAAAAAAAAAAAAcwEkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-04T19:33:30.019Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "ActionButtonHandler.cs",
-              "DocumentMoniker": "D:\\DromDesign\\Assets\\ActionButtonHandler.cs",
-              "RelativeDocumentMoniker": "Assets\\ActionButtonHandler.cs",
-              "ToolTip": "D:\\DromDesign\\Assets\\ActionButtonHandler.cs",
-              "RelativeToolTip": "Assets\\ActionButtonHandler.cs",
-              "ViewState": "AgIAACAAAAAAAAAAAAAAADYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-04T19:30:28.804Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "PhotonVoice.PUN.asmdef",
-              "DocumentMoniker": "D:\\DromDesign\\Assets\\Photon\\PhotonVoice\\Code\\PUN\\PhotonVoice.PUN.asmdef",
-              "RelativeDocumentMoniker": "Assets\\Photon\\PhotonVoice\\Code\\PUN\\PhotonVoice.PUN.asmdef",
-              "ToolTip": "D:\\DromDesign\\Assets\\Photon\\PhotonVoice\\Code\\PUN\\PhotonVoice.PUN.asmdef",
-              "RelativeToolTip": "Assets\\Photon\\PhotonVoice\\Code\\PUN\\PhotonVoice.PUN.asmdef",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001874|",
-              "WhenOpened": "2025-05-04T17:56:24.805Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "PhotonVoiceView.cs",
-              "DocumentMoniker": "D:\\DromDesign\\Assets\\Photon\\PhotonVoice\\Code\\PUN\\PhotonVoiceView.cs",
-              "RelativeDocumentMoniker": "Assets\\Photon\\PhotonVoice\\Code\\PUN\\PhotonVoiceView.cs",
-              "ToolTip": "D:\\DromDesign\\Assets\\Photon\\PhotonVoice\\Code\\PUN\\PhotonVoiceView.cs",
-              "RelativeToolTip": "Assets\\Photon\\PhotonVoice\\Code\\PUN\\PhotonVoiceView.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-04T17:55:04.434Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "DormDesignSpawner.cs",
-              "DocumentMoniker": "D:\\DromDesign\\Assets\\DormDesignSpawner.cs",
-              "RelativeDocumentMoniker": "Assets\\DormDesignSpawner.cs",
-              "ToolTip": "D:\\DromDesign\\Assets\\DormDesignSpawner.cs",
-              "RelativeToolTip": "Assets\\DormDesignSpawner.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAIwCQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-02T00:51:51.038Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Door.cs",
-              "DocumentMoniker": "D:\\DromDesign\\Assets\\Free Wood Door Pack\\Script\\Door.cs",
-              "RelativeDocumentMoniker": "Assets\\Free Wood Door Pack\\Script\\Door.cs",
-              "ToolTip": "D:\\DromDesign\\Assets\\Free Wood Door Pack\\Script\\Door.cs",
-              "RelativeToolTip": "Assets\\Free Wood Door Pack\\Script\\Door.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-02T00:47:31.52Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "TeleportDoor.cs",
-              "DocumentMoniker": "D:\\DromDesign\\Assets\\TeleportDoor.cs",
-              "RelativeDocumentMoniker": "Assets\\TeleportDoor.cs",
-              "ToolTip": "D:\\DromDesign\\Assets\\TeleportDoor.cs",
-              "RelativeToolTip": "Assets\\TeleportDoor.cs",
-              "ViewState": "AgIAADEAAAAAAAAAAAAgwEkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-02T00:25:52.284Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "TeleportDoorManager.cs",
-              "DocumentMoniker": "D:\\DromDesign\\Assets\\TeleportDoorManager.cs",
-              "RelativeDocumentMoniker": "Assets\\TeleportDoorManager.cs",
-              "ToolTip": "D:\\DromDesign\\Assets\\TeleportDoorManager.cs",
-              "RelativeToolTip": "Assets\\TeleportDoorManager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-02T00:24:51.881Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "Teleportation.cs",
-              "DocumentMoniker": "D:\\DromDesign\\Assets\\Teleportation.cs",
-              "RelativeDocumentMoniker": "Assets\\Teleportation.cs",
-              "ToolTip": "D:\\DromDesign\\Assets\\Teleportation.cs",
-              "RelativeToolTip": "Assets\\Teleportation.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAiwDcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-02T00:20:26.887Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "PlayerSync.cs",
-              "DocumentMoniker": "D:\\DromDesign\\Assets\\PlayerSync.cs",
-              "RelativeDocumentMoniker": "Assets\\PlayerSync.cs",
-              "ToolTip": "D:\\DromDesign\\Assets\\PlayerSync.cs",
-              "RelativeToolTip": "Assets\\PlayerSync.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAiwCQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-02T00:09:10.595Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
               "Title": "PlayerController.cs",
-              "DocumentMoniker": "D:\\DromDesign\\Assets\\PlayerController.cs",
-              "RelativeDocumentMoniker": "Assets\\PlayerController.cs",
-              "ToolTip": "D:\\DromDesign\\Assets\\PlayerController.cs",
-              "RelativeToolTip": "Assets\\PlayerController.cs",
-              "ViewState": "AgIAAE8AAAAAAAAAAAAcwGcAAAAAAAAAAAAAAA==",
+              "DocumentMoniker": "D:\\DromDesign\\Assets\\Scripts\\PlayerController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\PlayerController.cs",
+              "ToolTip": "D:\\DromDesign\\Assets\\Scripts\\PlayerController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\PlayerController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-02T00:03:20.602Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "PhotonConnectionManager.cs",
-              "DocumentMoniker": "D:\\DromDesign\\Assets\\PhotonConnectionManager.cs",
-              "RelativeDocumentMoniker": "Assets\\PhotonConnectionManager.cs",
-              "ToolTip": "D:\\DromDesign\\Assets\\PhotonConnectionManager.cs",
-              "RelativeToolTip": "Assets\\PhotonConnectionManager.cs",
-              "ViewState": "AgIAAC4AAAAAAAAAAAAcwEYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T23:58:08.679Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "StartScreenVRMenu.cs",
-              "DocumentMoniker": "D:\\DromDesign\\Assets\\StartScreenVRMenu.cs",
-              "RelativeDocumentMoniker": "Assets\\StartScreenVRMenu.cs",
-              "ToolTip": "D:\\DromDesign\\Assets\\StartScreenVRMenu.cs",
-              "RelativeToolTip": "Assets\\StartScreenVRMenu.cs",
-              "ViewState": "AgIAABQAAAAAAAAAAAAxwCsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-01T23:41:42.041Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "InventoryUIManager.cs",
-              "DocumentMoniker": "D:\\DromDesign\\Assets\\InventoryUIManager.cs",
-              "RelativeDocumentMoniker": "Assets\\InventoryUIManager.cs",
-              "ToolTip": "D:\\DromDesign\\Assets\\InventoryUIManager.cs",
-              "RelativeToolTip": "Assets\\InventoryUIManager.cs",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-29T20:41:49.843Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ObjectIcon.cs",
-              "DocumentMoniker": "D:\\DromDesign\\Assets\\ObjectIcon.cs",
-              "RelativeDocumentMoniker": "Assets\\ObjectIcon.cs",
-              "ToolTip": "D:\\DromDesign\\Assets\\ObjectIcon.cs",
-              "RelativeToolTip": "Assets\\ObjectIcon.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-29T20:40:34.103Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "ObjectThumbnail.cs",
-              "DocumentMoniker": "D:\\DromDesign\\Assets\\ObjectThumbnail.cs",
-              "RelativeDocumentMoniker": "Assets\\ObjectThumbnail.cs",
-              "ToolTip": "D:\\DromDesign\\Assets\\ObjectThumbnail.cs",
-              "RelativeToolTip": "Assets\\ObjectThumbnail.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-29T20:39:51.379Z"
+              "WhenOpened": "2025-05-06T05:26:58.145Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "AdvancedInventoryManager.cs",
-              "DocumentMoniker": "D:\\DromDesign\\Assets\\AdvancedInventoryManager.cs",
-              "RelativeDocumentMoniker": "Assets\\AdvancedInventoryManager.cs",
-              "ToolTip": "D:\\DromDesign\\Assets\\AdvancedInventoryManager.cs",
-              "RelativeToolTip": "Assets\\AdvancedInventoryManager.cs",
+              "Title": "ObjectMenuSpawner.cs",
+              "DocumentMoniker": "D:\\DromDesign\\Assets\\Scripts\\ObjectMenuSpawner.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\ObjectMenuSpawner.cs",
+              "ToolTip": "D:\\DromDesign\\Assets\\Scripts\\ObjectMenuSpawner.cs",
+              "RelativeToolTip": "Assets\\Scripts\\ObjectMenuSpawner.cs",
+              "ViewState": "AgIAALQAAAAAAAAAAAAiwM0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-29T20:39:29.378Z"
+              "WhenOpened": "2025-05-06T05:26:03.502Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "AdvancedInventoryUIController.cs",
-              "DocumentMoniker": "D:\\DromDesign\\Assets\\AdvancedInventoryUIController.cs",
-              "RelativeDocumentMoniker": "Assets\\AdvancedInventoryUIController.cs",
-              "ToolTip": "D:\\DromDesign\\Assets\\AdvancedInventoryUIController.cs",
-              "RelativeToolTip": "Assets\\AdvancedInventoryUIController.cs",
-              "ViewState": "AgIAAGcAAAAAAAAAAAAQwH4AAAAAAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "AdvancedInventoryManager.cs",
+              "DocumentMoniker": "D:\\DromDesign\\Assets\\Scripts\\AdvancedInventoryManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\AdvancedInventoryManager.cs",
+              "ToolTip": "D:\\DromDesign\\Assets\\Scripts\\AdvancedInventoryManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\AdvancedInventoryManager.cs",
+              "ViewState": "AgIAAFQAAAAAAAAAAAAiwGIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-03T03:01:47.403Z"
+              "WhenOpened": "2025-05-06T05:15:24.956Z",
+              "EditorCaption": ""
             }
           ]
         }

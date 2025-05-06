@@ -1,322 +1,205 @@
 using UnityEngine;
-using System.Collections;
 
 public class ObjectMenuSpawner : MonoBehaviour
 {
-    [Header("Assign in Inspector")]
     public GameObject objectMenu;
     public Behaviour movementComponent;
     public ReticlePointer reticlePointer;
-    [Tooltip("Maximum distance for the object to be selectable (should match OutlineSelection)")]
     public float selectableDistance = 10f;
-    [Tooltip("Height above the object's top where the menu appears")]
-    public float verticalOffset = 2f; // Changed from 0.1f to 2f for proper placement
+    public float verticalOffset = 1.2f; // Menu closer to object
 
-    [Header("Continuous Action Settings")]
-    [SerializeField] float rotationSpeed = 90f;
-    [SerializeField] float repositionSpeed = 2f;
-    [SerializeField, Range(0.05f, 2f)] float dragRate = 0.2f;
+    public float rotationSpeed = 90f;
+    public float repositionSpeed = 2f;
 
-    private Vector2 dragDegrees = Vector2.zero;
-    private Quaternion initialRotation;
-    [SerializeField] Transform cameraTransform = default;
+    public Transform cameraTransform;
     private Camera cam;
     private Transform currentTarget;
     public Transform CurrentTarget => currentTarget;
 
+    public AdvancedInventoryManager inventoryManager;
+
     public enum ActionMode { None, Rotate, Reposition }
     private ActionMode currentActionMode = ActionMode.None;
 
-#if UNITY_EDITOR
-    private Vector3 lastMousePos;
-    private bool vrActive;
-#endif
-
-    void Awake()
-    {
-        cam = cameraTransform != null ? cameraTransform.GetComponent<Camera>() : Camera.main;
-        initialRotation = cameraTransform.rotation;
-    }
+    private bool menuJustOpened = false;
 
     void Start()
     {
+        cam = Camera.main;
+        if (cam != null)
+        {
+            cameraTransform = cam.transform;
+            Debug.Log("✅ Camera assigned.");
+        }
+        else
+        {
+            Debug.LogError("❌ Main Camera not found!");
+        }
+
+        if (movementComponent == null)
+        {
+            GameObject character = GameObject.Find("Character");
+            if (character != null)
+            {
+                movementComponent = character.GetComponent<PlayerController>();
+                Debug.Log("✅ PlayerController assigned.");
+            }
+        }
+
         objectMenu.SetActive(false);
     }
 
     void Update()
     {
-        // Open/close menu using Y (JoystickButton3) or L key
-        if (Input.GetKeyDown(KeyCode.L) || Input.GetKeyDown(KeyCode.JoystickButton3))
+        if (Input.GetKeyDown(KeyCode.O) || Input.GetKeyDown(KeyCode.JoystickButton3))
         {
-            if (objectMenu.activeSelf)
+            Debug.Log("🟣 [Input] Toggling object menu...");
+            if (objectMenu.activeSelf) CloseMenu();
+            else TryOpenMenu();
+        }
+
+        if (menuJustOpened)
+        {
+            menuJustOpened = false;
+            return; // Prevent input on the same frame as menu opening
+        }
+
+        if (currentActionMode == ActionMode.Rotate && currentTarget != null)
+        {
+            if (Input.GetKey(KeyCode.R) || Input.GetKey(KeyCode.JoystickButton10))
             {
-                CloseMenu();
-                TryOpenMenu();
-            }
-            else
-            {
-                TryOpenMenu();
+                float delta = rotationSpeed * Time.deltaTime;
+                currentTarget.Rotate(Vector3.up * delta);
+                Debug.Log("🔁 Rotating object...");
             }
         }
 
-        if (currentActionMode != ActionMode.None && currentTarget != null)
+        if (currentActionMode == ActionMode.Reposition && currentTarget != null)
         {
             float horizontal = Input.GetAxis("Horizontal");
             float vertical = Input.GetAxis("Vertical");
 
-            if (currentActionMode == ActionMode.Rotate)
-            {
-                // 🔁 Rotate with joystick or A button
-                if (Mathf.Abs(horizontal) > 0.01f)
-                {
-                    float deltaAngle = horizontal * rotationSpeed * Time.deltaTime;
-                    currentTarget.Rotate(0f, deltaAngle, 0f);
-                }
-                else if (Input.GetKey(KeyCode.JoystickButton10)) // A button (hold to rotate)
-                {
-                    float deltaAngle = rotationSpeed * Time.deltaTime;
-                    currentTarget.Rotate(0f, deltaAngle, 0f);
-                }
-            }
-            else if (currentActionMode == ActionMode.Reposition && cam != null)
-            {
-                Vector3 moveInput = new Vector3(horizontal, 0f, vertical);
-                if (moveInput.sqrMagnitude > 0.001f)
-                {
-                    Vector3 moveDirection = cam.transform.right * moveInput.x + cam.transform.forward * moveInput.z;
-                    moveDirection.y = 0f;
-                    Vector3 deltaMove = moveDirection * repositionSpeed * Time.deltaTime;
-                    currentTarget.position += deltaMove;
-                }
-            }
+            Vector3 direction = new Vector3(horizontal, 0, vertical);
+            if (Input.GetKey(KeyCode.LeftArrow)) direction.x = -1;
+            if (Input.GetKey(KeyCode.RightArrow)) direction.x = 1;
+            if (Input.GetKey(KeyCode.UpArrow)) direction.z = 1;
+            if (Input.GetKey(KeyCode.DownArrow)) direction.z = -1;
 
-            // 🚪 Exit any action mode by pressing B (JoystickButton5)
-            if (Input.GetKeyDown(KeyCode.B) || Input.GetKeyDown(KeyCode.JoystickButton5))
+            if (direction.sqrMagnitude > 0.01f)
             {
-                currentActionMode = ActionMode.None;
-                movementComponent.enabled = true;
-                Debug.Log("❌ Exited action mode.");
+                Vector3 move = cameraTransform.right * direction.x + cameraTransform.forward * direction.z;
+                move.y = 0;
+                currentTarget.position += move.normalized * repositionSpeed * Time.deltaTime;
+                Debug.Log("↔️ Moving object...");
             }
         }
-        else
+
+        if (Input.GetKeyDown(KeyCode.B) || Input.GetKeyDown(KeyCode.JoystickButton5))
         {
-#if UNITY_EDITOR
-            if (vrActive)
-                SimulateVR();
-            else
-                SimulateDrag();
-#else
-            if (!UnityEngine.XR.XRSettings.enabled)
-                CheckDrag();
-#endif
-            UpdateCameraRotation();
+            ExitActionMode();
         }
     }
 
-    private void UpdateCameraRotation()
+    void TryOpenMenu()
     {
-        Quaternion attitude = initialRotation * Quaternion.Euler(dragDegrees.x, 0f, 0f);
-        cameraTransform.rotation = Quaternion.Euler(0f, -dragDegrees.y, 0f) * attitude;
-    }
-
-    public void ResetCamera()
-    {
-        cameraTransform.rotation = initialRotation;
-        dragDegrees = Vector2.zero;
-    }
-
-    public void DisableVR()
-    {
-#if UNITY_EDITOR
-        vrActive = false;
-#else
-        var xrManager = UnityEngine.XR.Management.XRGeneralSettings.Instance.Manager;
-        if (xrManager.isInitializationComplete)
-        {
-            xrManager.StopSubsystems();
-            xrManager.DeinitializeLoader();
-        }
-#endif
-        SetObjects(false);
-        ResetCamera();
-        cam.ResetAspect();
-        cam.fieldOfView = 60f;
-        cam.ResetProjectionMatrix();
-        cam.ResetWorldToCameraMatrix();
-        Screen.sleepTimeout = SleepTimeout.SystemSetting;
-    }
-
-    public void EnableVR() => EnableVRCoroutine();
-
-    public Coroutine EnableVRCoroutine()
-    {
-        return StartCoroutine(enableVRRoutine());
-        IEnumerator enableVRRoutine()
-        {
-            SetObjects(true);
-#if UNITY_EDITOR
-            yield return null;
-            vrActive = true;
-#else
-            var xrManager = UnityEngine.XR.Management.XRGeneralSettings.Instance.Manager;
-            if (!xrManager.isInitializationComplete)
-                yield return xrManager.InitializeLoader();
-            xrManager.StartSubsystems();
-#endif
-            Screen.sleepTimeout = SleepTimeout.NeverSleep;
-            ResetCamera();
-        }
-    }
-
-    void SetObjects(bool vrActive) { }
-
-    void CheckDrag()
-    {
-        if (Input.touchCount <= 0) return;
-        Touch touch = Input.GetTouch(0);
-        dragDegrees.x += touch.deltaPosition.y * dragRate;
-        dragDegrees.y += touch.deltaPosition.x * dragRate;
-    }
-
-#if UNITY_EDITOR
-    void SimulateVR()
-    {
-        Vector3 mousePos = Input.mousePosition;
-        if (Input.GetKey(KeyCode.LeftAlt))
-        {
-            Vector3 delta = mousePos - lastMousePos;
-            dragDegrees.x -= delta.y * dragRate;
-            dragDegrees.y -= delta.x * dragRate;
-        }
-        lastMousePos = mousePos;
-    }
-
-    void SimulateDrag()
-    {
-        Vector3 mousePos = Input.mousePosition;
-        if (Input.GetMouseButton(0))
-        {
-            Vector3 delta = mousePos - lastMousePos;
-            dragDegrees.x += delta.y * dragRate;
-            dragDegrees.y += delta.x * dragRate;
-        }
-        lastMousePos = mousePos;
-    }
-#endif
-
-    private void TryOpenMenu()
-    {
-        if (cam == null) cam = Camera.main;
         if (cam == null)
         {
-            Debug.LogWarning("No Main Camera found!");
+            Debug.LogError("❌ [TryOpenMenu] Main Camera is not assigned!");
             return;
         }
 
         Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
         if (Physics.Raycast(ray, out RaycastHit hit, selectableDistance))
         {
-            if (hit.collider.CompareTag("Selectable"))
+            string tag = hit.collider.tag;
+
+            if (tag == "LivingRoom" || tag == "Bedroom" || tag == "Bathroom")
             {
+                ExitActionMode(); // Clear mode before opening menu
                 currentTarget = hit.transform;
-                ShowMenuAt(currentTarget);
+                ShowMenuAbove(currentTarget);
+                menuJustOpened = true;
             }
             else
             {
-                Debug.Log("Hit object is not selectable: " + hit.collider.name);
+                Debug.Log("⛔ Invalid tag hit: " + tag);
             }
         }
         else
         {
-            Debug.Log("No object hit by the raycast from the center of the screen.");
+            Debug.Log("📭 No object hit.");
         }
     }
 
-    private void ShowMenuAt(Transform target)
+    void ShowMenuAbove(Transform target)
     {
-        movementComponent.enabled = false;
-        objectMenu.transform.SetParent(null);
+        objectMenu.SetActive(false);
 
-        // Get bounds of the full object including children
         Renderer rend = target.GetComponentInChildren<Renderer>();
-        Vector3 top = target.position;
+        Vector3 top = rend ? new Vector3(rend.bounds.center.x, rend.bounds.max.y, rend.bounds.center.z) : target.position;
+        Vector3 menuPos = top + Vector3.up * verticalOffset;
 
-        if (rend != null)
-        {
-            top = new Vector3(
-                rend.bounds.center.x,
-                rend.bounds.max.y,
-                rend.bounds.center.z
-            );
-        }
-
-        // Menu appears 2 units above top
-        Vector3 menuPosition = top + Vector3.up * verticalOffset;
-        objectMenu.transform.position = menuPosition;
-
-        // Menu faces camera
-        objectMenu.transform.rotation = Quaternion.LookRotation(menuPosition - cam.transform.position);
+        objectMenu.transform.position = menuPos;
+        objectMenu.transform.rotation = Quaternion.LookRotation(menuPos - cameraTransform.position);
 
         objectMenu.SetActive(true);
+        Debug.Log("📌 Menu opened above: " + target.name);
     }
-
-
 
     public void CloseMenu()
     {
-        CloseMenu(true);
-    }
-
-    public void CloseMenu(bool reenableMovement, bool keepTarget = false)
-    {
         objectMenu.SetActive(false);
-        if (!keepTarget)
-            currentTarget = null;
-        if (reenableMovement)
-            movementComponent.enabled = true;
-    }
-
-    public void DeleteItem()
-    {
-        if (currentTarget != null)
-        {
-            Destroy(currentTarget.gameObject);
-            CloseMenu();
-        }
+        ExitActionMode();
+        currentTarget = null;
+        Debug.Log("🛑 Menu closed and action reset.");
     }
 
     public void StartRotateMode()
     {
-        if (currentTarget != null)
-        {
-            currentActionMode = ActionMode.None;
-            CloseMenu(false, true);
-            movementComponent.enabled = false;
-            currentActionMode = ActionMode.Rotate;
-            Debug.Log("✅ Entered Rotate Mode.");
-        }
-        else
-        {
-            Debug.LogWarning("No target selected to rotate.");
-        }
+        if (!currentTarget) return;
+        currentActionMode = ActionMode.None;
+        objectMenu.SetActive(false);
+        currentActionMode = ActionMode.Rotate;
+        if (movementComponent != null) movementComponent.enabled = false;
+
+        Debug.Log("🔁 Entered Rotate Mode.");
     }
 
     public void StartRepositionMode()
     {
-        if (currentTarget != null)
-        {
-            currentActionMode = ActionMode.None;
-            CloseMenu(false, true);
-            movementComponent.enabled = false;
-            currentActionMode = ActionMode.Reposition;
-            Debug.Log("Entered Reposition Mode.");
-        }
-        else
-        {
-            Debug.LogWarning("No target selected to reposition.");
-        }
+        if (!currentTarget) return;
+        currentActionMode = ActionMode.None;
+        objectMenu.SetActive(false);
+        currentActionMode = ActionMode.Reposition;
+        if (movementComponent != null) movementComponent.enabled = false;
+
+        Debug.Log("↔️ Entered Reposition Mode.");
     }
 
-    
+    public void StoreObjectToInventory()
+    {
+        if (!currentTarget || !inventoryManager) return;
 
+        string category = currentTarget.CompareTag("LivingRoom") ? "Living"
+                        : currentTarget.CompareTag("Bedroom") ? "Bedroom"
+                        : currentTarget.CompareTag("Bathroom") ? "Bathroom"
+                        : "Living";
+
+        currentActionMode = ActionMode.None;
+        if (movementComponent != null) movementComponent.enabled = true;
+
+        inventoryManager.StoreObject(currentTarget.gameObject, category);
+        Debug.Log($"📦 Stored: {currentTarget.name} to {category}");
+
+        currentTarget = null;
+        objectMenu.SetActive(false);
+    }
+
+    public void ExitActionMode()
+    {
+        currentActionMode = ActionMode.None;
+        if (movementComponent != null)
+            movementComponent.enabled = true;
+        Debug.Log("❌ Cleared action mode.");
+    }
 }

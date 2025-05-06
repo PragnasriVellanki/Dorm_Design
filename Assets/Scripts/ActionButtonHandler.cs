@@ -3,52 +3,34 @@ using UnityEngine.EventSystems;
 
 public class ActionButtonHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public enum ActionType
-    {
-        Delete,            // 👈 Now behaves like StoreToInventory
-        Rotate,
-        Reposition,
-        StoreToInventory
-    }
-
+    public enum ActionType { StoreToInventory, Rotate, Reposition, Exit }
     public ActionType actionType;
     public ObjectMenuSpawner objectMenuSpawner;
 
-    private bool isHovered = false;
+    private bool isHovered;
 
     void Update()
     {
-        if (isHovered && (Input.GetKeyDown(KeyCode.JoystickButton2) || Input.GetKeyDown(KeyCode.JoystickButton10))) // X or A
+        if (isHovered && (Input.GetKeyDown(KeyCode.JoystickButton2) || Input.GetKeyDown(KeyCode.L)))
         {
-            if (objectMenuSpawner == null)
-            {
-                Debug.LogWarning("⚠️ ObjectMenuSpawner not assigned!");
-                return;
-            }
-
             switch (actionType)
             {
-                case ActionType.Delete:
-                
-
+                case ActionType.StoreToInventory:
+                    objectMenuSpawner.StoreObjectToInventory();
+                    break;
                 case ActionType.Rotate:
                     objectMenuSpawner.StartRotateMode();
                     break;
-
                 case ActionType.Reposition:
                     objectMenuSpawner.StartRepositionMode();
+                    break;
+                case ActionType.Exit:
+                    objectMenuSpawner.CloseMenu();
                     break;
             }
         }
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        isHovered = true;
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        isHovered = false;
-    }
+    public void OnPointerEnter(PointerEventData eventData) => isHovered = true;
+    public void OnPointerExit(PointerEventData eventData) => isHovered = false;
 }

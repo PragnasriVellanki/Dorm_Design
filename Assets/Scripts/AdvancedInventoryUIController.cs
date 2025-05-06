@@ -33,6 +33,16 @@ public class AdvancedInventoryUIController : MonoBehaviour
                 return;
             }
         }
+        // Find PlayerController on the Player
+        GameObject playerObj = GameObject.FindWithTag("Player");
+        if (playerObj != null)
+        {
+            playerController = playerObj.GetComponent<PlayerController>();
+            if (playerController != null)
+                Debug.Log("✅ Found PlayerController.");
+            else
+                Debug.LogWarning("⚠️ PlayerController not found on Player.");
+        }
 
         // Find the Main Camera from the spawned player
         if (mainCamera == null)
@@ -56,8 +66,13 @@ public class AdvancedInventoryUIController : MonoBehaviour
             canvas.worldCamera = mainCamera;
             Debug.Log("🎥 Event camera set to Main Camera.");
         }
+        livingRoomButton.onClick.AddListener(() => categoryManager.LoadLivingRoom());
+        bedRoomButton.onClick.AddListener(() => categoryManager.LoadBedRoom());
+        bathRoomButton.onClick.AddListener(() => categoryManager.LoadBathRoom());
 
         inventoryCanvas.SetActive(false);
+
+
     }
 
 
@@ -85,7 +100,7 @@ public class AdvancedInventoryUIController : MonoBehaviour
             {
                 // ✅ Position the canvas in front of the player
                 Vector3 forward = mainCamera.transform.forward;
-                inventoryCanvas.transform.position = mainCamera.transform.position + forward * 15f;
+                inventoryCanvas.transform.position = mainCamera.transform.position + forward * 4f;
                 inventoryCanvas.transform.rotation = Quaternion.LookRotation(forward);
             }
 
@@ -95,9 +110,6 @@ public class AdvancedInventoryUIController : MonoBehaviour
                 EventSystem.current.SetSelectedGameObject(livingRoomButton.gameObject);
                 Debug.Log("✅ Living Room Button Selected.");
             }
-
-            if (inventoryOpen)
-                categoryManager?.LoadCategory("Living");
 
             if (playerController != null)
             {
@@ -123,4 +135,9 @@ public class AdvancedInventoryUIController : MonoBehaviour
     {
         inputReady = true;
     }
+    public void LoadLivingRoom() => categoryManager?.LoadLivingRoom();
+    public void LoadBedRoom() => categoryManager?.LoadBedRoom();
+    public void LoadBathRoom() => categoryManager?.LoadBathRoom();
+
+
 }

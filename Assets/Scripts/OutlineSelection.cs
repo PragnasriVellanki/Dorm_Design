@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(Collider))]
 public class OutlineSelection : MonoBehaviour
 {
     private Outline outline;
+    private Camera raycastCamera;
 
     [Header("Selectable Settings")]
     [Tooltip("Maximum distance for the object to be selectable via raycast")]
@@ -10,6 +12,7 @@ public class OutlineSelection : MonoBehaviour
 
     void Start()
     {
+        // Add or fetch the Outline component
         outline = GetComponent<Outline>();
         if (outline == null)
         {
@@ -20,17 +23,26 @@ public class OutlineSelection : MonoBehaviour
         }
 
         outline.enabled = false;
-    }
 
-    public Camera raycastCamera;
+        // Automatically find and assign the Main Camera
+        GameObject camObj = GameObject.Find("Main Camera");
+        if (camObj != null)
+        {
+            raycastCamera = camObj.GetComponent<Camera>();
+            Debug.Log("✅ OutlineSelection assigned Main Camera.");
+        }
+        else
+        {
+            Debug.LogWarning("⚠️ Main Camera not found by name!");
+        }
+    }
 
     void Update()
     {
-        Camera cam = raycastCamera != null ? raycastCamera : Camera.main;
-        if (cam == null || outline == null) return;
+        if (raycastCamera == null || outline == null) return;
 
-        // Cast from center of screen or reticle
-        Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+        // Raycast from center of the camera view
+        Ray ray = raycastCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
 
         if (Physics.Raycast(ray, out RaycastHit hit, selectableDistance))
         {
@@ -42,6 +54,4 @@ public class OutlineSelection : MonoBehaviour
             outline.enabled = false;
         }
     }
-
-
 }

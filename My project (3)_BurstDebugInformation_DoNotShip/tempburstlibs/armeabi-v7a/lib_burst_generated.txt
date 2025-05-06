@@ -9,6 +9,7 @@ Library: D:\DromDesign\Temp\BurstOutput\tempburstlibs\armeabi-v7a\lib_burst_gene
 --target-framework=NetFramework
 --generate-link-xml=Temp\burst.link.xml
 --temp-folder=D:\DromDesign\Temp\Burst
+--debug=Full
 --key-folder=D:/Unity Hub/6000.0.34f1/Editor/Data/PlaybackEngines/AndroidPlayer
 --decode-folder=D:\DromDesign\Library\Burst
 --output=D:\DromDesign\Temp\BurstOutput\tempburstlibs\armeabi-v7a\lib_burst_generated
@@ -116,6 +117,7 @@ Library: D:\DromDesign\Temp\BurstOutput\tempburstlibs\armeabi-v7a\lib_burst_gene
 --float-mode=Fast
 --generate-link-xml=Temp\burst.link.xml
 --temp-folder=D:\DromDesign\Temp\Burst
+--debug=Full
 --key-folder=D:/Unity Hub/6000.0.34f1/Editor/Data/PlaybackEngines/AndroidPlayer
 --decode-folder=D:\DromDesign\Library\Burst
 --output=D:\DromDesign\Temp\BurstOutput\tempburstlibs\armeabi-v7a\lib_burst_generated
