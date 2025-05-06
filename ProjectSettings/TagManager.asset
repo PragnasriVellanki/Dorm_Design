@@ -9,6 +9,7 @@ TagManager:
   - LivingRoom
   - Bedroom
   - Bathroom
+  - PlayerCamera
   layers:
   - Default
   - TransparentFX

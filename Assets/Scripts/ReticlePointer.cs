@@ -1,28 +1,32 @@
 using UnityEngine;
+using Photon.Pun;
 
-public class ReticlePointer : MonoBehaviour
+public class ReticlePointer : MonoBehaviourPun
 {
-    [Header("References")]
-    public Transform character;  
-
     [Header("Settings")]
-    [Tooltip("Distance from the camera where the sphere reticle should be placed.")]
     public float sphereDistance = 10f;
 
-    private Camera cam;
+    private Camera localCamera;
 
-    void Awake()
+    void Start()
     {
-        cam = Camera.main;
+        if (!photonView.IsMine)
+        {
+            // Disable ReticlePointer for remote players
+            gameObject.SetActive(false);
+            return;
+        }
+
+        // Get the camera only from this player prefab
+        localCamera = GetComponentInParent<Camera>();
     }
 
     void Update()
     {
-        // Create a ray from the center of the screen.
-        Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-        // Calculate the position along the ray at sphereDistance.
+        if (localCamera == null) return;
+
+        Ray ray = localCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         Vector3 spherePosition = ray.GetPoint(sphereDistance);
-        // Set the sphere's position.
         transform.position = spherePosition;
     }
 }

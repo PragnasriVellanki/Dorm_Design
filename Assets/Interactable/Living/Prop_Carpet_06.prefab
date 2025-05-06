@@ -205,4 +205,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60792e98c9d204ea99d7fb0d04dd5f3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectableDistance: 10
+  selectableDistance: 20

@@ -18,7 +18,7 @@ public class AdvancedInventoryManager : MonoBehaviour
 
     void Start()
     {
-        GameObject gp = GameObject.Find("GrabPoint");
+        GameObject gp = GameObject.Find("GrabPoint"); // ✅ Still allowed
         if (gp != null)
             grabPoint = gp.transform;
         else
@@ -35,17 +35,18 @@ public class AdvancedInventoryManager : MonoBehaviour
             DropHeldObject();
         }
 
-        // Keep object following grab point (optional for smoothing)
+        // Keep object following grab point
         if (currentHeldObject != null && grabPoint != null)
         {
             currentHeldObject.transform.position = grabPoint.position;
         }
     }
+
     public void StoreObject(GameObject obj, string category)
     {
         if (obj == null) return;
 
-        obj.SetActive(false); // Hide object from scene
+        obj.SetActive(false); // Hide from scene
 
         switch (category)
         {
@@ -60,11 +61,13 @@ public class AdvancedInventoryManager : MonoBehaviour
 
     public void LoadCategory(string category)
     {
+        // Clear existing buttons
         foreach (Transform child in inventoryContentParent)
         {
             Destroy(child.gameObject);
         }
 
+        // Choose prefab list
         List<GameObject> prefabs = category switch
         {
             "Living" => livingRoomPrefabs,
@@ -85,21 +88,23 @@ public class AdvancedInventoryManager : MonoBehaviour
 
             btn.onClick.AddListener(() =>
             {
-                if (grabPoint != null)
+                if (grabPoint != null) // ✅ correct name
+
                 {
                     if (currentHeldObject != null)
                         Destroy(currentHeldObject);
 
                     currentHeldObject = Instantiate(prefab);
-                    currentHeldObject.transform.SetParent(null); // Temporarily unparent
+                    currentHeldObject.transform.SetParent(null); // unparent first
+                    currentHeldObject.transform.SetParent(grabPoint, false);
                     currentHeldObject.transform.localScale = Vector3.one;
-                    currentHeldObject.transform.SetParent(grabPoint, false); // Reparent clean
                     currentHeldObject.transform.localPosition = Vector3.zero;
                     currentHeldObject.transform.localRotation = Quaternion.identity;
 
-
-
-
+                    // Normalize scale across hierarchy
+                    Vector3 globalScale = currentHeldObject.transform.lossyScale;
+                    float correctionFactor = 1f / globalScale.x;
+                    currentHeldObject.transform.localScale *= correctionFactor;
 
                     // Disable physics
                     Rigidbody rb = currentHeldObject.GetComponent<Rigidbody>();
@@ -107,11 +112,11 @@ public class AdvancedInventoryManager : MonoBehaviour
 
                     Debug.Log($"🛠️ Grabbed object: {currentHeldObject.name}");
 
-                    // ✅ Hide inventory canvas properly
+                    // ✅ Hide canvas
                     GameObject canvas = GameObject.Find("InventoryCanvas");
                     if (canvas != null) canvas.SetActive(false);
 
-                    // ✅ Re-enable player movement
+                    // ✅ Unlock movement
                     GameObject player = GameObject.FindWithTag("Player");
                     if (player != null)
                     {
@@ -123,24 +128,15 @@ public class AdvancedInventoryManager : MonoBehaviour
                         }
                     }
 
-                    // ✅ Reset inventory UI open state
-                    AdvancedInventoryUIController uiController = FindObjectOfType<AdvancedInventoryUIController>();
+                    // ✅ Reset inventory UI state using public method
+                    AdvancedInventoryUIController uiController = UnityEngine.Object.FindFirstObjectByType<AdvancedInventoryUIController>();
                     if (uiController != null)
                     {
-                        typeof(AdvancedInventoryUIController)
-                            .GetField("inventoryOpen", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-                            .SetValue(uiController, false);
-
-                        Debug.Log("📂 InventoryOpen flag reset.");
+                        uiController.CloseInventoryExternally();
+                        Debug.Log("📂 InventoryOpen flag reset via public method.");
                     }
                 }
             });
-
-
-
-
-
-
         }
     }
 
@@ -148,13 +144,9 @@ public class AdvancedInventoryManager : MonoBehaviour
     {
         if (currentHeldObject != null)
         {
-            // Detach from hand
             currentHeldObject.transform.SetParent(null);
-
-            // Raise it slightly to avoid overlapping the floor
             currentHeldObject.transform.position += Vector3.up * 0.5f;
 
-            // Re-enable physics
             Rigidbody rb = currentHeldObject.GetComponent<Rigidbody>();
             if (rb != null)
             {
@@ -164,12 +156,12 @@ public class AdvancedInventoryManager : MonoBehaviour
             }
 
             Debug.Log("📦 Dropped object: " + currentHeldObject.name);
+
             currentHeldObject = null;
         }
     }
 
-
-    // Optional: for external buttons
+    // Category button access
     public void LoadLivingRoom() => LoadCategory("Living");
     public void LoadBedRoom() => LoadCategory("Bedroom");
     public void LoadBathRoom() => LoadCategory("Bathroom");

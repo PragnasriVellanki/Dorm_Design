@@ -3,16 +3,36 @@
   "WorkspaceRootPath": "D:\\DromDesign\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{386C9597-341C-7709-9455-D624B62F545A}|Assembly-CSharp.csproj|d:\\dromdesign\\assets\\scripts\\objectmenuspawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{386C9597-341C-7709-9455-D624B62F545A}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\objectmenuspawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{386C9597-341C-7709-9455-D624B62F545A}|Assembly-CSharp.csproj|d:\\dromdesign\\assets\\eventsystemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{386C9597-341C-7709-9455-D624B62F545A}|Assembly-CSharp.csproj|solutionrelative:assets\\eventsystemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{386C9597-341C-7709-9455-D624B62F545A}|Assembly-CSharp.csproj|d:\\dromdesign\\assets\\scripts\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{386C9597-341C-7709-9455-D624B62F545A}|Assembly-CSharp.csproj|d:\\dromdesign\\assets\\scripts\\reticlepointer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{386C9597-341C-7709-9455-D624B62F545A}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\reticlepointer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{386C9597-341C-7709-9455-D624B62F545A}|Assembly-CSharp.csproj|D:\\DromDesign\\assets\\scripts\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{386C9597-341C-7709-9455-D624B62F545A}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{386C9597-341C-7709-9455-D624B62F545A}|Assembly-CSharp.csproj|d:\\dromdesign\\assets\\scripts\\advancedinventorymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{386C9597-341C-7709-9455-D624B62F545A}|Assembly-CSharp.csproj|D:\\DromDesign\\assets\\scripts\\playersync.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{386C9597-341C-7709-9455-D624B62F545A}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\playersync.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{386C9597-341C-7709-9455-D624B62F545A}|Assembly-CSharp.csproj|D:\\DromDesign\\assets\\scripts\\advancedinventorymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{386C9597-341C-7709-9455-D624B62F545A}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\advancedinventorymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{386C9597-341C-7709-9455-D624B62F545A}|Assembly-CSharp.csproj|D:\\DromDesign\\assets\\scripts\\advancedinventoryuicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{386C9597-341C-7709-9455-D624B62F545A}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\advancedinventoryuicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{386C9597-341C-7709-9455-D624B62F545A}|Assembly-CSharp.csproj|D:\\DromDesign\\assets\\scripts\\objectmenuspawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{386C9597-341C-7709-9455-D624B62F545A}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\objectmenuspawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{386C9597-341C-7709-9455-D624B62F545A}|Assembly-CSharp.csproj|D:\\DromDesign\\assets\\scripts\\dormdesignspawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{386C9597-341C-7709-9455-D624B62F545A}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\dormdesignspawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,46 +42,105 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "EventSystemController.cs",
+              "DocumentMoniker": "D:\\DromDesign\\Assets\\EventSystemController.cs",
+              "RelativeDocumentMoniker": "Assets\\EventSystemController.cs",
+              "ToolTip": "D:\\DromDesign\\Assets\\EventSystemController.cs",
+              "RelativeToolTip": "Assets\\EventSystemController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-06T20:58:10.607Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "ReticlePointer.cs",
+              "DocumentMoniker": "D:\\DromDesign\\Assets\\Scripts\\ReticlePointer.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\ReticlePointer.cs",
+              "ToolTip": "D:\\DromDesign\\Assets\\Scripts\\ReticlePointer.cs",
+              "RelativeToolTip": "Assets\\Scripts\\ReticlePointer.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAiwCAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-06T20:55:33.733Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PlayerSync.cs",
+              "DocumentMoniker": "D:\\DromDesign\\Assets\\Scripts\\PlayerSync.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\PlayerSync.cs",
+              "ToolTip": "D:\\DromDesign\\Assets\\Scripts\\PlayerSync.cs",
+              "RelativeToolTip": "Assets\\Scripts\\PlayerSync.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAUwCQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-06T20:34:59.086Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "DormDesignSpawner.cs",
+              "DocumentMoniker": "D:\\DromDesign\\Assets\\Scripts\\DormDesignSpawner.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\DormDesignSpawner.cs",
+              "ToolTip": "D:\\DromDesign\\Assets\\Scripts\\DormDesignSpawner.cs",
+              "RelativeToolTip": "Assets\\Scripts\\DormDesignSpawner.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-06T19:21:19.018Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AdvancedInventoryUIController.cs",
+              "DocumentMoniker": "D:\\DromDesign\\Assets\\Scripts\\AdvancedInventoryUIController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\AdvancedInventoryUIController.cs",
+              "ToolTip": "D:\\DromDesign\\Assets\\Scripts\\AdvancedInventoryUIController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\AdvancedInventoryUIController.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAqwCoAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-06T18:33:44.849Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "PlayerController.cs",
               "DocumentMoniker": "D:\\DromDesign\\Assets\\Scripts\\PlayerController.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\PlayerController.cs",
               "ToolTip": "D:\\DromDesign\\Assets\\Scripts\\PlayerController.cs",
               "RelativeToolTip": "Assets\\Scripts\\PlayerController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAgAAAAAAAAAA==",
+              "ViewState": "AgIAACkAAAAAAAAAAAAiwEIAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-06T05:26:58.145Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-06T05:26:58.145Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 6,
               "Title": "ObjectMenuSpawner.cs",
               "DocumentMoniker": "D:\\DromDesign\\Assets\\Scripts\\ObjectMenuSpawner.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\ObjectMenuSpawner.cs",
               "ToolTip": "D:\\DromDesign\\Assets\\Scripts\\ObjectMenuSpawner.cs",
               "RelativeToolTip": "Assets\\Scripts\\ObjectMenuSpawner.cs",
-              "ViewState": "AgIAAGwAAAAAAAAAAAAiwIUAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAKQAAAAAAAAAAAAAwLAAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-06T05:26:03.502Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-06T05:26:03.502Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "AdvancedInventoryManager.cs",
               "DocumentMoniker": "D:\\DromDesign\\Assets\\Scripts\\AdvancedInventoryManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\AdvancedInventoryManager.cs",
               "ToolTip": "D:\\DromDesign\\Assets\\Scripts\\AdvancedInventoryManager.cs",
               "RelativeToolTip": "Assets\\Scripts\\AdvancedInventoryManager.cs",
-              "ViewState": "AgIAAEMAAAAAAAAAAAAqwF8AAAAUAAAAAAAAAA==",
+              "ViewState": "AgIAAFoAAAAAAAAAAAAqwGYAAABPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-06T05:15:24.956Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-06T05:15:24.956Z"
             }
           ]
         }

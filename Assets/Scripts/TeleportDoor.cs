@@ -34,20 +34,25 @@ public class TeleportDoor : MonoBehaviour
         {
             popupCanvas.SetActive(false);
         }
-        
     }
 
     void Update()
     {
-        if (isHovered && (Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.T) || Input.GetKeyDown(KeyCode.JoystickButton2)))
+        // Only local player can trigger teleport
+        if (!PhotonNetwork.IsConnected || !PhotonNetwork.InRoom) return;
+
+        if (isHovered && IsLocalPlayerLookingAtMe())
         {
-            if (isLocked)
+            if (Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.T) || Input.GetKeyDown(KeyCode.JoystickButton2))
             {
-                ShowLockedPopup();
-            }
-            else
-            {
-                TeleportPlayer();
+                if (isLocked)
+                {
+                    ShowLockedPopup();
+                }
+                else
+                {
+                    TeleportLocalPlayer();
+                }
             }
         }
     }
@@ -62,13 +67,25 @@ public class TeleportDoor : MonoBehaviour
         }
     }
 
-    void TeleportPlayer()
+    void TeleportLocalPlayer()
     {
-        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        // Find the local player only
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        GameObject localPlayer = null;
 
-        if (playerObj == null)
+        foreach (GameObject player in players)
         {
-            Debug.LogWarning("❌ Could not find player with tag 'Player'.");
+            PhotonView pv = player.GetComponent<PhotonView>();
+            if (pv != null && pv.IsMine)
+            {
+                localPlayer = player;
+                break;
+            }
+        }
+
+        if (localPlayer == null)
+        {
+            Debug.LogWarning("❌ Could not find local player to teleport.");
             return;
         }
 
@@ -78,16 +95,16 @@ public class TeleportDoor : MonoBehaviour
             return;
         }
 
-        CharacterController cc = playerObj.GetComponent<CharacterController>();
+        CharacterController cc = localPlayer.GetComponent<CharacterController>();
         if (cc != null) cc.enabled = false;
 
         Vector3 targetPos = teleportTarget.position;
         targetPos.y += verticalOffset;
-        playerObj.transform.position = targetPos;
+        localPlayer.transform.position = targetPos;
 
         if (cc != null) cc.enabled = true;
 
-        Debug.Log("🟢 Teleported player to: " + teleportTarget.name);
+        Debug.Log("🟢 Teleported local player to: " + teleportTarget.name);
     }
 
     void ShowLockedPopup()
@@ -105,5 +122,26 @@ public class TeleportDoor : MonoBehaviour
     {
         if (popupCanvas != null)
             popupCanvas.SetActive(false);
+    }
+
+    bool IsLocalPlayerLookingAtMe()
+    {
+        // Find the local player's camera
+        Camera[] allCams = Object.FindObjectsByType<Camera>(FindObjectsSortMode.None);
+        foreach (Camera cam in allCams)
+        {
+            if (cam.CompareTag("PlayerCamera") && cam.gameObject.activeInHierarchy)
+            {
+                Ray ray = new Ray(cam.transform.position, cam.transform.forward);
+                if (Physics.Raycast(ray, out RaycastHit hit, 10f))
+                {
+                    if (hit.collider != null && hit.collider.gameObject == gameObject)
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 }

@@ -24,16 +24,21 @@ public class OutlineSelection : MonoBehaviour
 
         outline.enabled = false;
 
-        // Automatically find and assign the Main Camera
-        GameObject camObj = GameObject.Find("Main Camera");
-        if (camObj != null)
+        // ✅ Assign the correct local PlayerCamera
+        Camera[] allCams = Object.FindObjectsByType<Camera>(FindObjectsSortMode.None);
+        foreach (Camera cam in allCams)
         {
-            raycastCamera = camObj.GetComponent<Camera>();
-            Debug.Log("✅ OutlineSelection assigned Main Camera.");
+            if (cam.CompareTag("PlayerCamera") && cam.gameObject.activeInHierarchy)
+            {
+                raycastCamera = cam;
+                Debug.Log("✅ OutlineSelection assigned PlayerCamera.");
+                break;
+            }
         }
-        else
+
+        if (raycastCamera == null)
         {
-            Debug.LogWarning("⚠️ Main Camera not found by name!");
+            Debug.LogWarning("⚠️ No active PlayerCamera found for OutlineSelection!");
         }
     }
 
@@ -41,7 +46,6 @@ public class OutlineSelection : MonoBehaviour
     {
         if (raycastCamera == null || outline == null) return;
 
-        // Raycast from center of the camera view
         Ray ray = raycastCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
 
         if (Physics.Raycast(ray, out RaycastHit hit, selectableDistance))

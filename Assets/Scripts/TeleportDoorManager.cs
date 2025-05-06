@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TeleportDoorManager : MonoBehaviour
 {
@@ -8,18 +8,29 @@ public class TeleportDoorManager : MonoBehaviour
 
     void Start()
     {
-        cam = Camera.main;
+        Camera[] allCams = Object.FindObjectsByType<Camera>(FindObjectsSortMode.None);
+        foreach (Camera c in allCams)
+        {
+            if (c.CompareTag("PlayerCamera") && c.gameObject.activeInHierarchy)
+            {
+                cam = c;
+                break;
+            }
+        }
+
+        if (cam == null)
+            Debug.LogError("❌ No local PlayerCamera found in TeleportDoorManager.");
     }
+
 
     void Update()
     {
-        Ray ray = new Ray(cam.transform.position, cam.transform.forward);
-        RaycastHit hit;
+        if (cam == null) return; // Prevent crash
 
-        if (Physics.Raycast(ray, out hit, maxRaycastDistance))
+        Ray ray = new Ray(cam.transform.position, cam.transform.forward);
+        if (Physics.Raycast(ray, out RaycastHit hit, maxRaycastDistance))
         {
             TeleportDoor door = hit.collider.GetComponent<TeleportDoor>();
-
             if (door != null)
             {
                 if (currentHoveredDoor != door)
@@ -39,6 +50,8 @@ public class TeleportDoorManager : MonoBehaviour
             ClearPreviousHighlight();
         }
     }
+
+
 
     void ClearPreviousHighlight()
     {

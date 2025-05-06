@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using Photon.Pun;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Users;
 
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(PhotonView))]
@@ -25,35 +27,52 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
     {
         controller = GetComponent<CharacterController>();
 
+        PlayerInput input = GetComponent<PlayerInput>();
+
         if (photonView.IsMine)
         {
-            gameObject.tag = "Player"; // Used for teleport logic, etc.
+            gameObject.tag = "Player";
 
-            // Auto-assign camera if not set
+            // Assign camera
             if (cameraTransform == null)
             {
                 Camera cam = Camera.main;
                 if (cam != null)
-                {
                     cameraTransform = cam.transform;
+            }
+
+            if (input != null)
+            {
+                input.enabled = true;
+
+                // Lock InputUser to this player
+                if (input.user != null)
+                {
+                    if (Keyboard.current != null)
+                        InputUser.PerformPairingWithDevice(Keyboard.current, input.user);
+
+                    if (Gamepad.current != null)
+                        InputUser.PerformPairingWithDevice(Gamepad.current, input.user);
                 }
+
             }
         }
         else
         {
-            // Disable remote player's rig visuals
+            if (input != null)
+                input.enabled = false;
+
             Transform rigRoot = transform.Find("XRCardboardRig");
             if (rigRoot != null)
                 rigRoot.gameObject.SetActive(false);
 
-            // Optional: disable script completely for remote players
             this.enabled = false;
         }
     }
-
     void Update()
     {
-        if (!photonView.IsMine || isMovementLocked) return;
+        if (!photonView.IsMine || isMovementLocked)
+            return;
 
         HandleMovement();
     }
@@ -75,18 +94,14 @@ public class PlayerController : MonoBehaviourPun, IPunObservable
         controller.Move(move * moveSpeed * Time.deltaTime);
 
         if (!controller.isGrounded)
-        {
             velocity.y += gravity * Time.deltaTime;
-        }
         else
-        {
             velocity.y = -1f;
-        }
 
         controller.Move(velocity * Time.deltaTime);
     }
 
-    // Sync position/rotation across network
+    // Photon network sync
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)

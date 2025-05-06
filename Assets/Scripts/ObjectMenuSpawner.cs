@@ -6,7 +6,7 @@ public class ObjectMenuSpawner : MonoBehaviour
     public Behaviour movementComponent;
     public ReticlePointer reticlePointer;
     public float selectableDistance = 10f;
-    public float verticalOffset = 1.2f; // Menu closer to object
+    public float verticalOffset = 1f; // Menu closer to object
 
     public float rotationSpeed = 90f;
     public float repositionSpeed = 2f;
@@ -20,12 +20,39 @@ public class ObjectMenuSpawner : MonoBehaviour
 
     public enum ActionMode { None, Rotate, Reposition }
     private ActionMode currentActionMode = ActionMode.None;
-
+    private PlayerController playerController;
     private bool menuJustOpened = false;
 
     void Start()
     {
-        cam = Camera.main;
+        Camera[] allCameras = Object.FindObjectsByType<Camera>(FindObjectsSortMode.None);
+        foreach (Camera c in allCameras)
+        {
+            if (c.CompareTag("PlayerCamera") && c.gameObject.activeInHierarchy)
+            {
+                cam = c;
+                cameraTransform = c.transform;
+                Debug.Log("✅ Local PlayerCamera assigned.");
+                break;
+            }
+        }
+        // ✅ Assign PlayerCamera to the Object Menu Canvas
+        Canvas objectMenuCanvas = objectMenu.GetComponent<Canvas>();
+        if (objectMenuCanvas != null && cam != null)
+        {
+            objectMenuCanvas.worldCamera = cam;
+            Debug.Log("🎯 Assigned PlayerCamera to Object Menu Canvas.");
+        }
+        else
+        {
+            Debug.LogWarning("⚠️ Object Menu Canvas or Camera not found!");
+        }
+
+        if (cam == null)
+        {
+            Debug.LogError("❌ No active PlayerCamera found!");
+        }
+
         if (cam != null)
         {
             cameraTransform = cam.transform;
@@ -36,14 +63,15 @@ public class ObjectMenuSpawner : MonoBehaviour
             Debug.LogError("❌ Main Camera not found!");
         }
 
-        if (movementComponent == null)
+        // Find PlayerController on the Player
+        GameObject playerObj = GameObject.FindWithTag("Player");
+        if (playerObj != null)
         {
-            GameObject character = GameObject.Find("Character");
-            if (character != null)
-            {
-                movementComponent = character.GetComponent<PlayerController>();
-                Debug.Log("✅ PlayerController assigned.");
-            }
+            playerController = playerObj.GetComponent<PlayerController>();
+            if (playerController != null)
+                Debug.Log("✅ Found PlayerController.");
+            else
+                Debug.LogWarning("⚠️ PlayerController not found on Player.");
         }
 
         objectMenu.SetActive(false);
@@ -102,6 +130,7 @@ public class ObjectMenuSpawner : MonoBehaviour
 
     void TryOpenMenu()
     {
+        playerController.isMovementLocked = false;
         if (cam == null)
         {
             Debug.LogError("❌ [TryOpenMenu] Main Camera is not assigned!");
@@ -137,7 +166,8 @@ public class ObjectMenuSpawner : MonoBehaviour
 
         Renderer rend = target.GetComponentInChildren<Renderer>();
         Vector3 top = rend ? new Vector3(rend.bounds.center.x, rend.bounds.max.y, rend.bounds.center.z) : target.position;
-        Vector3 menuPos = top + Vector3.up * verticalOffset;
+        Vector3 menuPos = top + Vector3.up * 0.7f; // fixed value
+
 
         objectMenu.transform.position = menuPos;
         objectMenu.transform.rotation = Quaternion.LookRotation(menuPos - cameraTransform.position);
@@ -149,6 +179,7 @@ public class ObjectMenuSpawner : MonoBehaviour
     public void CloseMenu()
     {
         objectMenu.SetActive(false);
+        currentActionMode = ActionMode.None;
         ExitActionMode();
         currentTarget = null;
         Debug.Log("🛑 Menu closed and action reset.");
@@ -171,9 +202,10 @@ public class ObjectMenuSpawner : MonoBehaviour
         currentActionMode = ActionMode.None;
         objectMenu.SetActive(false);
         currentActionMode = ActionMode.Reposition;
-        if (movementComponent != null) movementComponent.enabled = false;
-
+        //if (movementComponent != null) movementComponent.enabled = false;
+        playerController.isMovementLocked = true;
         Debug.Log("↔️ Entered Reposition Mode.");
+
     }
 
     public void StoreObjectToInventory()

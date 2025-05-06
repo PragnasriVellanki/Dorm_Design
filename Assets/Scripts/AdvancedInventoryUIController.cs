@@ -45,19 +45,26 @@ public class AdvancedInventoryUIController : MonoBehaviour
         }
 
         // Find the Main Camera from the spawned player
+        // ✅ Modern Unity-safe camera assignment
         if (mainCamera == null)
         {
-            GameObject camObj = GameObject.Find("Main Camera");
-            if (camObj != null)
+            Camera[] allCameras = Object.FindObjectsByType<Camera>(FindObjectsSortMode.None);
+            foreach (Camera cam in allCameras)
             {
-                mainCamera = camObj.GetComponent<Camera>();
-                Debug.Log("✅ Main Camera assigned dynamically.");
+                if (cam.CompareTag("PlayerCamera") && cam.gameObject.activeInHierarchy)
+                {
+                    mainCamera = cam;
+                    Debug.Log("✅ Main Camera assigned from PlayerCamera tag.");
+                    break;
+                }
             }
-            else
+
+            if (mainCamera == null)
             {
-                Debug.LogError("❌ Main Camera not found!");
+                Debug.LogError("❌ No active PlayerCamera found!");
             }
         }
+
 
         // Assign Event Camera to Canvas
         Canvas canvas = inventoryCanvas.GetComponent<Canvas>();
@@ -129,6 +136,19 @@ public class AdvancedInventoryUIController : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(null);
             Debug.Log("🔄 Inventory closed and selection cleared.");
         }
+    }
+    public void CloseInventoryExternally()
+    {
+        inventoryOpen = false;
+
+        if (inventoryCanvas != null)
+            inventoryCanvas.SetActive(false);
+
+        if (playerController != null)
+            playerController.isMovementLocked = false;
+
+        EventSystem.current.SetSelectedGameObject(null);
+        Debug.Log("📂 Inventory closed externally.");
     }
 
     void ResetInput()
