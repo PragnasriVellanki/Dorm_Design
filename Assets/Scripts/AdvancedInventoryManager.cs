@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class AdvancedInventoryManager : MonoBehaviour
 {
@@ -15,27 +16,27 @@ public class AdvancedInventoryManager : MonoBehaviour
 
     private Transform grabPoint;
     private GameObject currentHeldObject;
+    private InventoryUIManager uiManager;
 
     void Start()
     {
-        GameObject gp = GameObject.Find("GrabPoint"); // ✅ Still allowed
+        GameObject gp = GameObject.Find("GrabPoint");
         if (gp != null)
             grabPoint = gp.transform;
         else
             Debug.LogWarning("❌ GrabPoint not found.");
 
         LoadCategory("Living");
+        uiManager = UnityEngine.Object.FindFirstObjectByType<InventoryUIManager>();
     }
 
     void Update()
     {
-        // Drop object on Q (keyboard) or A (JoystickButton0)
-        if (currentHeldObject != null && (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.JoystickButton0)))
+        if (currentHeldObject != null && (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.JoystickButton5)))
         {
             DropHeldObject();
         }
 
-        // Keep object following grab point
         if (currentHeldObject != null && grabPoint != null)
         {
             currentHeldObject.transform.position = grabPoint.position;
@@ -46,7 +47,7 @@ public class AdvancedInventoryManager : MonoBehaviour
     {
         if (obj == null) return;
 
-        obj.SetActive(false); // Hide from scene
+        obj.SetActive(false);
 
         switch (category)
         {
@@ -61,13 +62,11 @@ public class AdvancedInventoryManager : MonoBehaviour
 
     public void LoadCategory(string category)
     {
-        // Clear existing buttons
         foreach (Transform child in inventoryContentParent)
         {
             Destroy(child.gameObject);
         }
 
-        // Choose prefab list
         List<GameObject> prefabs = category switch
         {
             "Living" => livingRoomPrefabs,
@@ -86,57 +85,71 @@ public class AdvancedInventoryManager : MonoBehaviour
             if (img != null && thumb != null && thumb.thumbnail != null)
                 img.sprite = thumb.thumbnail;
 
+            GameObject capturedPrefab = prefab;
             btn.onClick.AddListener(() =>
             {
-                if (grabPoint != null) // ✅ correct name
-
-                {
-                    if (currentHeldObject != null)
-                        Destroy(currentHeldObject);
-
-                    currentHeldObject = Instantiate(prefab);
-                    currentHeldObject.transform.SetParent(null); // unparent first
-                    currentHeldObject.transform.SetParent(grabPoint, false);
-                    currentHeldObject.transform.localScale = Vector3.one;
-                    currentHeldObject.transform.localPosition = Vector3.zero;
-                    currentHeldObject.transform.localRotation = Quaternion.identity;
-
-                    // Normalize scale across hierarchy
-                    Vector3 globalScale = currentHeldObject.transform.lossyScale;
-                    float correctionFactor = 1f / globalScale.x;
-                    currentHeldObject.transform.localScale *= correctionFactor;
-
-                    // Disable physics
-                    Rigidbody rb = currentHeldObject.GetComponent<Rigidbody>();
-                    if (rb != null) rb.isKinematic = true;
-
-                    Debug.Log($"🛠️ Grabbed object: {currentHeldObject.name}");
-
-                    // ✅ Hide canvas
-                    GameObject canvas = GameObject.Find("InventoryCanvas");
-                    if (canvas != null) canvas.SetActive(false);
-
-                    // ✅ Unlock movement
-                    GameObject player = GameObject.FindWithTag("Player");
-                    if (player != null)
-                    {
-                        PlayerController pc = player.GetComponent<PlayerController>();
-                        if (pc != null)
-                        {
-                            pc.isMovementLocked = false;
-                            Debug.Log("🎮 Player movement unlocked after grabbing.");
-                        }
-                    }
-
-                    // ✅ Reset inventory UI state using public method
-                    AdvancedInventoryUIController uiController = UnityEngine.Object.FindFirstObjectByType<AdvancedInventoryUIController>();
-                    if (uiController != null)
-                    {
-                        uiController.CloseInventoryExternally();
-                        Debug.Log("📂 InventoryOpen flag reset via public method.");
-                    }
-                }
+                livingRoomPrefabs.Remove(capturedPrefab);
+                bedRoomPrefabs.Remove(capturedPrefab);
+                bathRoomPrefabs.Remove(capturedPrefab);
+                GrabObject(capturedPrefab, null);
             });
+        }
+
+        if (uiManager != null)
+        {
+            List<Button> allButtons = new List<Button>();
+            foreach (Transform child in inventoryContentParent)
+            {
+                Button b = child.GetComponent<Button>();
+                if (b != null) allButtons.Add(b);
+            }
+            uiManager.SetInventoryButtons(allButtons);
+        }
+    }
+
+    private void GrabObject(GameObject prefab, List<GameObject> sourceList)
+    {
+        if (grabPoint != null)
+        {
+            if (currentHeldObject != null)
+                Destroy(currentHeldObject);
+
+            currentHeldObject = Instantiate(prefab);
+            currentHeldObject.transform.SetParent(null);
+            currentHeldObject.transform.SetParent(grabPoint, false);
+            currentHeldObject.transform.localScale = Vector3.one;
+            currentHeldObject.transform.localPosition = Vector3.zero;
+            currentHeldObject.transform.localRotation = Quaternion.identity;
+
+            Vector3 globalScale = currentHeldObject.transform.lossyScale;
+            float correctionFactor = 1f / globalScale.x;
+            currentHeldObject.transform.localScale *= correctionFactor;
+
+            Rigidbody rb = currentHeldObject.GetComponent<Rigidbody>();
+            if (rb != null) rb.isKinematic = true;
+
+            Debug.Log($"🛠️ Grabbed object: {currentHeldObject.name}");
+
+            GameObject canvas = GameObject.Find("InventoryCanvas");
+            if (canvas != null) canvas.SetActive(false);
+
+            GameObject player = GameObject.FindWithTag("Player");
+            if (player != null)
+            {
+                PlayerController pc = player.GetComponent<PlayerController>();
+                if (pc != null)
+                {
+                    pc.isMovementLocked = false;
+                    Debug.Log("🎮 Player movement unlocked after grabbing.");
+                }
+            }
+
+            AdvancedInventoryUIController uiController = UnityEngine.Object.FindFirstObjectByType<AdvancedInventoryUIController>();
+            if (uiController != null)
+            {
+                uiController.CloseInventoryExternally();
+                Debug.Log("📂 InventoryOpen flag reset via public method.");
+            }
         }
     }
 
@@ -156,12 +169,10 @@ public class AdvancedInventoryManager : MonoBehaviour
             }
 
             Debug.Log("📦 Dropped object: " + currentHeldObject.name);
-
             currentHeldObject = null;
         }
     }
 
-    // Category button access
     public void LoadLivingRoom() => LoadCategory("Living");
     public void LoadBedRoom() => LoadCategory("Bedroom");
     public void LoadBathRoom() => LoadCategory("Bathroom");

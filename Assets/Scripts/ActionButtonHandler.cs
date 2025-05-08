@@ -11,7 +11,9 @@ public class ActionButtonHandler : MonoBehaviour, IPointerEnterHandler, IPointer
 
     void Update()
     {
-        if (isHovered && (Input.GetKeyDown(KeyCode.JoystickButton2) || Input.GetKeyDown(KeyCode.L)))
+        GameObject selected = EventSystem.current.currentSelectedGameObject;
+
+        if (selected == gameObject && (Input.GetKeyDown(KeyCode.JoystickButton2) || Input.GetKeyDown(KeyCode.L)))
         {
             switch (actionType)
             {
@@ -30,6 +32,7 @@ public class ActionButtonHandler : MonoBehaviour, IPointerEnterHandler, IPointer
             }
         }
     }
+
 
     public void OnPointerEnter(PointerEventData eventData)
     {

@@ -43,7 +43,7 @@ public class TeleportDoor : MonoBehaviour
 
         if (isHovered && IsLocalPlayerLookingAtMe())
         {
-            if (Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.T) || Input.GetKeyDown(KeyCode.JoystickButton2))
+            if (Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.T) || Input.GetKeyDown(KeyCode.JoystickButton5))
             {
                 if (isLocked)
                 {

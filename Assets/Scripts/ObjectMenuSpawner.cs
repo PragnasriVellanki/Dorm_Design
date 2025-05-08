@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class ObjectMenuSpawner : MonoBehaviour
 {
@@ -6,7 +8,7 @@ public class ObjectMenuSpawner : MonoBehaviour
     public Behaviour movementComponent;
     public ReticlePointer reticlePointer;
     public float selectableDistance = 10f;
-    public float verticalOffset = 1f; // Menu closer to object
+    public float verticalOffset = 0.7f; // Adjusted for closer menu position
 
     public float rotationSpeed = 90f;
     public float repositionSpeed = 2f;
@@ -32,47 +34,17 @@ public class ObjectMenuSpawner : MonoBehaviour
             {
                 cam = c;
                 cameraTransform = c.transform;
-                Debug.Log("✅ Local PlayerCamera assigned.");
                 break;
             }
         }
-        // ✅ Assign PlayerCamera to the Object Menu Canvas
+
         Canvas objectMenuCanvas = objectMenu.GetComponent<Canvas>();
         if (objectMenuCanvas != null && cam != null)
-        {
             objectMenuCanvas.worldCamera = cam;
-            Debug.Log("🎯 Assigned PlayerCamera to Object Menu Canvas.");
-        }
-        else
-        {
-            Debug.LogWarning("⚠️ Object Menu Canvas or Camera not found!");
-        }
 
-        if (cam == null)
-        {
-            Debug.LogError("❌ No active PlayerCamera found!");
-        }
-
-        if (cam != null)
-        {
-            cameraTransform = cam.transform;
-            Debug.Log("✅ Camera assigned.");
-        }
-        else
-        {
-            Debug.LogError("❌ Main Camera not found!");
-        }
-
-        // Find PlayerController on the Player
         GameObject playerObj = GameObject.FindWithTag("Player");
         if (playerObj != null)
-        {
             playerController = playerObj.GetComponent<PlayerController>();
-            if (playerController != null)
-                Debug.Log("✅ Found PlayerController.");
-            else
-                Debug.LogWarning("⚠️ PlayerController not found on Player.");
-        }
 
         objectMenu.SetActive(false);
     }
@@ -81,15 +53,29 @@ public class ObjectMenuSpawner : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.O) || Input.GetKeyDown(KeyCode.JoystickButton3))
         {
-            Debug.Log("🟣 [Input] Toggling object menu...");
-            if (objectMenu.activeSelf) CloseMenu();
-            else TryOpenMenu();
+            if (objectMenu.activeSelf)
+                CloseMenu();
+            else
+                TryOpenMenu();
         }
 
         if (menuJustOpened)
         {
             menuJustOpened = false;
-            return; // Prevent input on the same frame as menu opening
+            return;
+        }
+        if (objectMenu.activeSelf && Input.GetKeyDown(KeyCode.JoystickButton2))
+        {
+            GameObject selected = EventSystem.current.currentSelectedGameObject;
+            if (selected != null)
+            {
+                Button btn = selected.GetComponent<Button>();
+                if (btn != null)
+                {
+                    btn.onClick.Invoke(); // Manually trigger click
+                    Debug.Log($"✅ JS2 triggered: {btn.gameObject.name}");
+                }
+            }
         }
 
         if (currentActionMode == ActionMode.Rotate && currentTarget != null)
@@ -98,7 +84,6 @@ public class ObjectMenuSpawner : MonoBehaviour
             {
                 float delta = rotationSpeed * Time.deltaTime;
                 currentTarget.Rotate(Vector3.up * delta);
-                Debug.Log("🔁 Rotating object...");
             }
         }
 
@@ -118,7 +103,6 @@ public class ObjectMenuSpawner : MonoBehaviour
                 Vector3 move = cameraTransform.right * direction.x + cameraTransform.forward * direction.z;
                 move.y = 0;
                 currentTarget.position += move.normalized * repositionSpeed * Time.deltaTime;
-                Debug.Log("↔️ Moving object...");
             }
         }
 
@@ -130,33 +114,30 @@ public class ObjectMenuSpawner : MonoBehaviour
 
     void TryOpenMenu()
     {
-        playerController.isMovementLocked = false;
-        if (cam == null)
-        {
-            Debug.LogError("❌ [TryOpenMenu] Main Camera is not assigned!");
-            return;
-        }
+        if (cam == null) return;
+        AdvancedInventoryUIController inv = FindAnyObjectByType<AdvancedInventoryUIController>();
+        if (inv != null) inv.CloseInventoryExternally();
 
         Ray ray = cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
         if (Physics.Raycast(ray, out RaycastHit hit, selectableDistance))
         {
             string tag = hit.collider.tag;
-
             if (tag == "LivingRoom" || tag == "Bedroom" || tag == "Bathroom")
             {
-                ExitActionMode(); // Clear mode before opening menu
+                ExitActionMode();
                 currentTarget = hit.transform;
                 ShowMenuAbove(currentTarget);
                 menuJustOpened = true;
+
+                // ⏸️ Lock movement
+                if (playerController != null)
+                    playerController.isMovementLocked = true;
+
+                // ✅ Focus first button
+                Button firstBtn = objectMenu.GetComponentInChildren<Button>();
+                if (firstBtn != null)
+                    EventSystem.current.SetSelectedGameObject(firstBtn.gameObject);
             }
-            else
-            {
-                Debug.Log("⛔ Invalid tag hit: " + tag);
-            }
-        }
-        else
-        {
-            Debug.Log("📭 No object hit.");
         }
     }
 
@@ -164,48 +145,50 @@ public class ObjectMenuSpawner : MonoBehaviour
     {
         objectMenu.SetActive(false);
 
-        Renderer rend = target.GetComponentInChildren<Renderer>();
-        Vector3 top = rend ? new Vector3(rend.bounds.center.x, rend.bounds.max.y, rend.bounds.center.z) : target.position;
-        Vector3 menuPos = top + Vector3.up * 0.7f; // fixed value
+        Vector3 objectPosition = target.position;
 
+        // Use fixed vertical offset instead of relying on bounds
+        Vector3 menuPos = objectPosition + Vector3.up * verticalOffset;
 
         objectMenu.transform.position = menuPos;
         objectMenu.transform.rotation = Quaternion.LookRotation(menuPos - cameraTransform.position);
 
         objectMenu.SetActive(true);
-        Debug.Log("📌 Menu opened above: " + target.name);
+        Debug.Log("📌 Object Menu spawned at fixed offset above target.");
+    }
+
+    public bool IsMenuOpen()
+    {
+        return objectMenu.activeSelf;
     }
 
     public void CloseMenu()
     {
+        Debug.Log("🛑 Closing Object Menu...");
         objectMenu.SetActive(false);
         currentActionMode = ActionMode.None;
         ExitActionMode();
         currentTarget = null;
-        Debug.Log("🛑 Menu closed and action reset.");
+
+        if (playerController != null)
+            playerController.isMovementLocked = false;
     }
+
 
     public void StartRotateMode()
     {
         if (!currentTarget) return;
-        currentActionMode = ActionMode.None;
         objectMenu.SetActive(false);
         currentActionMode = ActionMode.Rotate;
         if (movementComponent != null) movementComponent.enabled = false;
-
-        Debug.Log("🔁 Entered Rotate Mode.");
     }
 
     public void StartRepositionMode()
     {
         if (!currentTarget) return;
-        currentActionMode = ActionMode.None;
         objectMenu.SetActive(false);
         currentActionMode = ActionMode.Reposition;
-        //if (movementComponent != null) movementComponent.enabled = false;
-        playerController.isMovementLocked = true;
-        Debug.Log("↔️ Entered Reposition Mode.");
-
+        if (playerController != null) playerController.isMovementLocked = true;
     }
 
     public void StoreObjectToInventory()
@@ -217,14 +200,15 @@ public class ObjectMenuSpawner : MonoBehaviour
                         : currentTarget.CompareTag("Bathroom") ? "Bathroom"
                         : "Living";
 
-        currentActionMode = ActionMode.None;
         if (movementComponent != null) movementComponent.enabled = true;
 
         inventoryManager.StoreObject(currentTarget.gameObject, category);
-        Debug.Log($"📦 Stored: {currentTarget.name} to {category}");
 
         currentTarget = null;
         objectMenu.SetActive(false);
+
+        if (playerController != null)
+            playerController.isMovementLocked = false;
     }
 
     public void ExitActionMode()
@@ -232,6 +216,5 @@ public class ObjectMenuSpawner : MonoBehaviour
         currentActionMode = ActionMode.None;
         if (movementComponent != null)
             movementComponent.enabled = true;
-        Debug.Log("❌ Cleared action mode.");
     }
 }

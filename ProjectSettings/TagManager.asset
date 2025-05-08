@@ -10,6 +10,7 @@ TagManager:
   - Bedroom
   - Bathroom
   - PlayerCamera
+  - Robot
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - Water
   - UI
   - InventoryOnly
-  - 
+  - Robot
   - 
   - 
   - 

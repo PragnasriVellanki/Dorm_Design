@@ -18,7 +18,7 @@ public class AdvancedInventoryUIController : MonoBehaviour
     private bool inputReady = true;
 
     private PlayerController playerController;
-
+    public ObjectMenuSpawner objectMenuSpawner;
     void Start()
     {
         Debug.Log("📦 Inventory UI Controller started.");
@@ -98,7 +98,7 @@ public class AdvancedInventoryUIController : MonoBehaviour
     {
         inventoryOpen = !inventoryOpen;
         Debug.Log("📂 Inventory Open: " + inventoryOpen);
-
+        if (inventoryOpen) CloseObjectMenuIfOpen();
         if (inventoryCanvas != null)
         {
             inventoryCanvas.SetActive(inventoryOpen);
@@ -149,6 +149,19 @@ public class AdvancedInventoryUIController : MonoBehaviour
 
         EventSystem.current.SetSelectedGameObject(null);
         Debug.Log("📂 Inventory closed externally.");
+    }
+    public void CloseObjectMenuIfOpen()
+    {
+        Debug.Log("🔁 Checking if Object Menu is open to close...");
+        if (objectMenuSpawner != null && objectMenuSpawner.IsMenuOpen())
+        {
+            Debug.Log("✅ Object Menu was open. Closing it.");
+            objectMenuSpawner.CloseMenu();
+        }
+        else
+        {
+            Debug.Log("ℹ️ Object Menu is already closed.");
+        }
     }
 
     void ResetInput()
