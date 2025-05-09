@@ -1,0 +1,70 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\DormDesign\\Dorm_Design\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4D47C51E-DE51-7AF9-DBF9-F28683FF3CD8}|Assembly-CSharp.csproj|E:\\DormDesign\\Dorm_Design\\assets\\robotstartcanvascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4D47C51E-DE51-7AF9-DBF9-F28683FF3CD8}|Assembly-CSharp.csproj|solutionrelative:assets\\robotstartcanvascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4D47C51E-DE51-7AF9-DBF9-F28683FF3CD8}|Assembly-CSharp.csproj|e:\\dormdesign\\dorm_design\\assets\\geminimanager\\unityandgeminiv3.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4D47C51E-DE51-7AF9-DBF9-F28683FF3CD8}|Assembly-CSharp.csproj|solutionrelative:assets\\geminimanager\\unityandgeminiv3.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4D47C51E-DE51-7AF9-DBF9-F28683FF3CD8}|Assembly-CSharp.csproj|E:\\DormDesign\\Dorm_Design\\assets\\robotchatspawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4D47C51E-DE51-7AF9-DBF9-F28683FF3CD8}|Assembly-CSharp.csproj|solutionrelative:assets\\robotchatspawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UnityAndGeminiV3.cs",
+              "DocumentMoniker": "E:\\DormDesign\\Dorm_Design\\Assets\\GeminiManager\\UnityAndGeminiV3.cs",
+              "RelativeDocumentMoniker": "Assets\\GeminiManager\\UnityAndGeminiV3.cs",
+              "ToolTip": "E:\\DormDesign\\Dorm_Design\\Assets\\GeminiManager\\UnityAndGeminiV3.cs",
+              "RelativeToolTip": "Assets\\GeminiManager\\UnityAndGeminiV3.cs",
+              "ViewState": "AgIAAHwBAAAAAAAAAAAtwIYBAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-09T03:08:39.57Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "RobotStartCanvasController.cs",
+              "DocumentMoniker": "E:\\DormDesign\\Dorm_Design\\Assets\\RobotStartCanvasController.cs",
+              "RelativeDocumentMoniker": "Assets\\RobotStartCanvasController.cs",
+              "ToolTip": "E:\\DormDesign\\Dorm_Design\\Assets\\RobotStartCanvasController.cs",
+              "RelativeToolTip": "Assets\\RobotStartCanvasController.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAcwB0AAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-09T01:42:06.875Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "RobotChatSpawner.cs",
+              "DocumentMoniker": "E:\\DormDesign\\Dorm_Design\\Assets\\RobotChatSpawner.cs",
+              "RelativeDocumentMoniker": "Assets\\RobotChatSpawner.cs",
+              "ToolTip": "E:\\DormDesign\\Dorm_Design\\Assets\\RobotChatSpawner.cs",
+              "RelativeToolTip": "Assets\\RobotChatSpawner.cs",
+              "ViewState": "AgIAAOMAAAAAAAAAAAAwwPsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-09T01:30:57.839Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

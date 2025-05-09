@@ -113,6 +113,7 @@
     <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\IgnoreUiRaycastWhenInactive.cs" />
     <Compile Include="Assets\Scripts\PlayerSync.cs" />
     <Compile Include="Assets\Scripts\DormDesignSpawner.cs" />
+    <Compile Include="Assets\RobotStartCanvasController.cs" />
     <Compile Include="Assets\Photon\PhotonVoice\Demos\DemoVoicePun\Standard Assets\CrossPlatformInput\Scripts\CrossPlatformInputManager.cs" />
     <Compile Include="Assets\Scripts\InventoryCategoryButton.cs" />
     <Compile Include="Assets\MiLabCardboardExtension\Scripts\XRCardboard\XRCardboardInputSettings.cs" />

@@ -82,6 +82,8 @@ public class UnityAndGeminiV3 : MonoBehaviour
     private Quaternion originalRobotRotation;
     private Vector3 originalRobotScale;
     private PlayerController playerController;
+    [Header("Greeting Canvas Reference")]
+    public RobotStartCanvasController startCanvasController;
 
 
 
@@ -170,6 +172,8 @@ public class UnityAndGeminiV3 : MonoBehaviour
         string url = $"{apiEndpoint}?key={apiKey}";
         string jsonData = "{\"contents\": [{\"parts\": [{\"text\": \"" + promptText + "\"}]}]}";
         byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(jsonData);
+        if (startCanvasController != null && robotTransform != null)
+            startCanvasController.HideGreetingCanvas(robotTransform);
 
         // STEP 1: Show the popup immediately with a loading message (optional)
         if (showPopup && responsePopup != null && responsePopupText != null)
@@ -389,6 +393,8 @@ public class UnityAndGeminiV3 : MonoBehaviour
             robotTransform.rotation = originalRobotRotation;
             robotTransform.localScale = originalRobotScale;
         }
+        if (startCanvasController != null && robotTransform != null)
+            startCanvasController.ShowGreetingCanvas(robotTransform);
 
         if (playerController != null)
             playerController.isMovementLocked = false;

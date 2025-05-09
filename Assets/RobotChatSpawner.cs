@@ -25,8 +25,7 @@ public class RobotChatSpawner : MonoBehaviour
     public float verticalOffset = 1.5f;
     public float selectableDistance = 10f;
 
-    [Header("Greeting Canvas")]
-    public GameObject robotGreetingCanvas;
+    
 
     public UnityAndGeminiV3 geminiAgent;
     public AdvancedInventoryManager inventoryManager;
@@ -45,9 +44,6 @@ public class RobotChatSpawner : MonoBehaviour
     private bool isMenuOpen = false;
     private int currentIndex = 0;
     private Button[] questionButtons;
-    private TextMeshProUGUI greetingText;
-    private string originalGreeting = "Hey there! I’m DormE 😊 Come closer and press Y to chat with me!";
-    private Coroutine restoreGreetingCoroutine;
 
     [Header("Robot Movement")]
     public Vector3 openOffset = new Vector3(-1.5f, 0, 0);
@@ -70,8 +66,7 @@ public class RobotChatSpawner : MonoBehaviour
             }
         }
 
-        if (robotGreetingCanvas != null)
-            greetingText = robotGreetingCanvas.GetComponentInChildren<TextMeshProUGUI>();
+        
 
         if (robotChatCanvas != null)
         {
@@ -170,6 +165,8 @@ public class RobotChatSpawner : MonoBehaviour
         }
 
         if (!isMenuOpen) return;
+        
+
 
         float vertical = Input.GetAxis("Vertical");
 
@@ -200,6 +197,9 @@ public class RobotChatSpawner : MonoBehaviour
         Vector3 menuPos = cameraTransform.position + cameraTransform.forward * 2f;
         robotChatCanvas.transform.position = menuPos;
         robotChatCanvas.transform.rotation = Quaternion.LookRotation(menuPos - cameraTransform.position);
+        RobotStartCanvasController startCanvas = Object.FindFirstObjectByType<RobotStartCanvasController>();
+        if (startCanvas != null && currentRobotTransform != null)
+            startCanvas.HideGreetingCanvas(currentRobotTransform);
 
         if (currentRobotTransform != null)
         {
@@ -220,8 +220,7 @@ public class RobotChatSpawner : MonoBehaviour
         if (playerController != null)
             playerController.isMovementLocked = true;
 
-        if (robotGreetingCanvas != null)
-            robotGreetingCanvas.SetActive(false);
+        
 
         Debug.Log("🤖 Robot chat opened.");
     }
@@ -244,26 +243,20 @@ public class RobotChatSpawner : MonoBehaviour
         if (playerController != null)
             playerController.isMovementLocked = false;
 
-        if (robotGreetingCanvas != null && greetingText != null)
-        {
-            robotGreetingCanvas.SetActive(true);
+        if (playerController != null)
+            playerController.isMovementLocked = false;
 
-            if (restoreGreetingCoroutine != null)
-                StopCoroutine(restoreGreetingCoroutine);
+        RobotStartCanvasController startCanvas = Object.FindFirstObjectByType<RobotStartCanvasController>();
+        if (startCanvas != null && currentRobotTransform != null)
+            startCanvas.ShowGreetingCanvas(currentRobotTransform);
 
-            greetingText.text = "Thanks for spending time with me!";
-            restoreGreetingCoroutine = StartCoroutine(RestoreGreetingTextAfterDelay(3f));
-        }
 
         Debug.Log("❌ Robot chat closed.");
     }
 
-    IEnumerator RestoreGreetingTextAfterDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        if (greetingText != null)
-            greetingText.text = originalGreeting;
-    }
+
+
+
 
     void ShowAnswer(string answer)
     {
