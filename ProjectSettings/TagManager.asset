@@ -10,7 +10,10 @@ TagManager:
   - Bedroom
   - Bathroom
   - PlayerCamera
-  - Robot
+  - Bullet
+  - RobotLiving
+  - RobotBed
+  - RobotBath
   layers:
   - Default
   - TransparentFX

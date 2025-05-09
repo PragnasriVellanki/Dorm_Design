@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using TMPro;
 using System.IO;
 using System;
+using System.Linq;
+
 
 [System.Serializable]
 public class UnityAndGeminiKey { public string key; }
@@ -163,23 +165,21 @@ public class UnityAndGeminiV3 : MonoBehaviour
         StartCoroutine(SendPromptRequestToGemini(designPrompt, true));
     }
 
-    private IEnumerator SendPromptRequestToGemini(string promptText, bool showPopup = false)
+    public IEnumerator SendPromptRequestToGemini(string promptText, bool showPopup = false, System.Action<string> onResponse = null)
     {
         string url = $"{apiEndpoint}?key={apiKey}";
         string jsonData = "{\"contents\": [{\"parts\": [{\"text\": \"" + promptText + "\"}]}]}";
         byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(jsonData);
 
-        // STEP 1: Show the popup immediately with a loading message
+        // STEP 1: Show the popup immediately with a loading message (optional)
         if (showPopup && responsePopup != null && responsePopupText != null)
         {
-            responsePopup.SetActive(false);  // Ensure it's hidden before positioning
+            responsePopup.SetActive(false);
 
-            // Position and rotate popup
             Vector3 forward = mainCamera.transform.forward;
             responsePopup.transform.position = mainCamera.transform.position + forward * 2.5f;
             responsePopup.transform.rotation = Quaternion.LookRotation(forward);
 
-            // Position robot
             if (robotTransform != null)
             {
                 Vector3 offset = mainCamera.transform.right * openOffset.x +
@@ -195,11 +195,10 @@ public class UnityAndGeminiV3 : MonoBehaviour
                 playerController.isMovementLocked = true;
 
             responsePopupText.text = "Hold on! I'm thinking...";
-            responsePopup.SetActive(true);  // ✅ Show after all transforms are applied
-
+            responsePopup.SetActive(true);
         }
 
-        // STEP 2: Send request
+        // STEP 2: Send Gemini request
         using (UnityWebRequest www = new UnityWebRequest(url, "POST"))
         {
             www.uploadHandler = new UploadHandlerRaw(jsonToSend);
@@ -208,39 +207,119 @@ public class UnityAndGeminiV3 : MonoBehaviour
 
             yield return www.SendWebRequest();
 
-            // STEP 3: Show result or error
+            // STEP 3: Handle response
             if (www.result != UnityWebRequest.Result.Success)
             {
                 Debug.LogError(www.error);
+                string fallback = "⚠️ Oops! Something went wrong.";
+
                 if (showPopup && responsePopupText != null)
-                    responsePopupText.text = "⚠️ Oops! Something went wrong.";
+                    responsePopupText.text = fallback;
+
+                onResponse?.Invoke(fallback);
             }
             else
             {
                 TextResponse response = JsonUtility.FromJson<TextResponse>(www.downloadHandler.text);
+
                 if (response.candidates.Length > 0 && response.candidates[0].content.parts.Length > 0)
                 {
                     string text = response.candidates[0].content.parts[0].text;
+                    Debug.Log("[Gemini ✅ Response] " + text);
 
-                    // Log basic interpretation first if needed
-                    if (text.ToLower().Contains("kitchen"))
-                        Debug.Log("👨‍🍳 Gemini thinks you're in the kitchen.");
-                    else if (text.ToLower().Contains("bathroom"))
-                        Debug.Log("🛁 Gemini thinks you're in the bathroom.");
-                    else if (text.ToLower().Contains("bedroom"))
-                        Debug.Log("🛏️ Gemini thinks you're in the bedroom.");
-
-                    if (responsePopupText != null)
+                    if (showPopup && responsePopupText != null)
                         responsePopupText.text = text;
+
+                    onResponse?.Invoke(text);
                 }
                 else
                 {
-                    if (responsePopupText != null)
-                        responsePopupText.text = "🤖 Hmm... I couldn’t come up with a response.";
+                    string fallback = "🤖 Hmm... I couldn’t come up with a response.";
+
+                    if (showPopup && responsePopupText != null)
+                        responsePopupText.text = fallback;
+
+                    onResponse?.Invoke(fallback);
                 }
             }
         }
     }
+
+
+    public List<string> GetExpectedRoomPrefabNames(string room)
+    {
+        List<string> expectedNames = new List<string>();
+
+        // Use exact match since GetRoomFromRobotTag() returns exact room names
+        if (room == "bedroom")
+        {
+            foreach (var prefab in inventoryManager.bedRoomPrefabs)
+            {
+                if (prefab != null)
+                    expectedNames.Add(prefab.name.Trim());
+            }
+        }
+        else if (room == "bathroom")
+        {
+            foreach (var prefab in inventoryManager.bathRoomPrefabs)
+            {
+                if (prefab != null)
+                    expectedNames.Add(prefab.name.Trim());
+            }
+        }
+        else if (room == "living room")
+        {
+            foreach (var prefab in inventoryManager.livingRoomPrefabs)
+            {
+                if (prefab != null)
+                    expectedNames.Add(prefab.name.Trim());
+            }
+        }
+        else
+        {
+            Debug.LogWarning("⚠️ No prefab list found for room: " + room);
+        }
+
+        Debug.Log("✅ Prefabs for room [" + room + "]: " + string.Join(", ", expectedNames));
+        return expectedNames;
+    }
+
+
+    public string BuildRoomInventoryPrompt(string room, List<string> currentItems, bool isAddPrompt)
+    {
+        // 1. Get expected prefab names for the room
+        List<string> expectedRaw = new List<string>();
+
+        if (room == "bedroom") expectedRaw = inventoryManager.bedRoomPrefabs.ConvertAll(obj => obj.name);
+        else if (room == "bathroom") expectedRaw = inventoryManager.bathRoomPrefabs.ConvertAll(obj => obj.name);
+        else if (room == "living room") expectedRaw = inventoryManager.livingRoomPrefabs.ConvertAll(obj => obj.name);
+
+        Debug.Log($"✅ Prefabs for room [{room}]: {string.Join(", ", expectedRaw)}");
+        Debug.Log($"📦 Current Placed Items: {string.Join(", ", currentItems)}");
+
+     
+
+        // 3. Build prompt string
+        if (isAddPrompt)
+        {
+            return $"The user is designing a {room}. They've already added: {string.Join(", ", currentItems)}. " +
+                   $"They haven't yet added: {string.Join(", ", expectedRaw)}. " +
+                   $"Please give 2-3 helpful suggestions on what to add to complete the room. Use general names like 'bed' or 'lamp' instead of object file names." +
+                   $"Keep it really short like 1-4 sentences. Avoid bullet points and the use of **.";
+        }
+        else
+        {
+            if (currentItems.Count == 0)
+            {
+                return $"Since there are no items in the room yet, there's nothing to remove or replace. The player should start placing furniture first.";
+            }
+
+            return $"The user is designing a {room}. They've added: {string.Join(", ", currentItems)}. " +
+                   $"Please give 2-3 suggestions for what could be removed, replaced, or reorganized. Use general terms, not file names." +
+                   $"Keep it really short like 1-4 sentences. Avoid bullet points and the use of **.";
+        }
+    }
+
 
 
     public void SendChat()

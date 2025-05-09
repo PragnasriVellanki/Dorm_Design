@@ -284,7 +284,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: What do you do?
+  m_text: What can I add to this room?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4462,7 +4462,7 @@ GameObject:
   - component: {fileID: 609331800}
   m_Layer: 7
   m_Name: RobotBedRoom
-  m_TagString: Robot
+  m_TagString: RobotBed
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6568,7 +6568,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: What do you do?
+  m_text: What can I remove from this room?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6722,7 +6722,7 @@ GameObject:
   - component: {fileID: 1108845223}
   m_Layer: 7
   m_Name: RobotLivingRoom
-  m_TagString: Robot
+  m_TagString: RobotLiving
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9121,7 +9121,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: What do you do?
+  m_text: What is the design layout?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -10928,7 +10928,7 @@ GameObject:
   - component: {fileID: 1699136069}
   m_Layer: 7
   m_Name: RobotBathRoom
-  m_TagString: Robot
+  m_TagString: RobotBath
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11136,6 +11136,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1734305176}
   - component: {fileID: 1734305175}
+  - component: {fileID: 1734305178}
+  - component: {fileID: 1734305177}
   m_Layer: 0
   m_Name: RobotManager
   m_TagString: Untagged
@@ -11166,9 +11168,12 @@ MonoBehaviour:
   backButton: {fileID: 1286085390}
   verticalOffset: 1.5
   selectableDistance: 10
-  robotTag: Robot
   robotGreetingCanvas: {fileID: 800620984}
-  robotTransform: {fileID: 1108845217}
+  geminiAgent: {fileID: 827472985}
+  inventoryManager: {fileID: 1567997288}
+  bedRobot: {fileID: 609331802}
+  bathRobot: {fileID: 1699136071}
+  livingRobot: {fileID: 1108845217}
   openOffset: {x: -1.4, y: -0.9, z: -0.4}
   scaledDownScale: {x: 1, y: 1, z: 1}
   openRotationEuler: {x: 0, y: 20, z: 0}
@@ -11187,6 +11192,70 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1734305177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1734305174}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 629b079dcda9fab47945fcd212f6be48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  robotChatCanvas: {fileID: 1952061602}
+  questionPanel: {fileID: 1925690093}
+  answerPanel: {fileID: 1777631497}
+  answerText: {fileID: 1691995889}
+  questionButton1: {fileID: 412710572}
+  questionButton2: {fileID: 311797738}
+  questionButton3: {fileID: 1778634251}
+  questionButton4: {fileID: 1283183789}
+  backButton: {fileID: 1286085390}
+  verticalOffset: 1.5
+  selectableDistance: 10
+  robotGreetingCanvas: {fileID: 800620984}
+  geminiAgent: {fileID: 827472985}
+  inventoryManager: {fileID: 1567997288}
+  bedRobot: {fileID: 0}
+  bathRobot: {fileID: 0}
+  livingRobot: {fileID: 0}
+  openOffset: {x: -1.5, y: 0, z: 0}
+  scaledDownScale: {x: 0.5, y: 0.5, z: 0.5}
+  openRotationEuler: {x: 0, y: -30, z: 0}
+--- !u!114 &1734305178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1734305174}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 629b079dcda9fab47945fcd212f6be48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  robotChatCanvas: {fileID: 1952061602}
+  questionPanel: {fileID: 1925690093}
+  answerPanel: {fileID: 1777631497}
+  answerText: {fileID: 1691995889}
+  questionButton1: {fileID: 412710572}
+  questionButton2: {fileID: 311797738}
+  questionButton3: {fileID: 1778634251}
+  questionButton4: {fileID: 1283183789}
+  backButton: {fileID: 1286085390}
+  verticalOffset: 1.5
+  selectableDistance: 10
+  robotGreetingCanvas: {fileID: 800620984}
+  geminiAgent: {fileID: 827472985}
+  inventoryManager: {fileID: 1567997288}
+  bedRobot: {fileID: 0}
+  bathRobot: {fileID: 0}
+  livingRobot: {fileID: 0}
+  openOffset: {x: -1.5, y: 0, z: 0}
+  scaledDownScale: {x: 0.5, y: 0.5, z: 0.5}
+  openRotationEuler: {x: 0, y: -30, z: 0}
 --- !u!1 &1753918754
 GameObject:
   m_ObjectHideFlags: 0

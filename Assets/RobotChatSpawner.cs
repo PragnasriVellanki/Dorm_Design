@@ -3,6 +3,8 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 using System.Collections;
+using System.Collections.Generic;
+
 
 public class RobotChatSpawner : MonoBehaviour
 {
@@ -22,34 +24,38 @@ public class RobotChatSpawner : MonoBehaviour
     [Header("Settings")]
     public float verticalOffset = 1.5f;
     public float selectableDistance = 10f;
-    public string robotTag = "Robot";
 
     [Header("Greeting Canvas")]
     public GameObject robotGreetingCanvas;
 
+    public UnityAndGeminiV3 geminiAgent;
+    public AdvancedInventoryManager inventoryManager;
+
+    [Header("Room Robot References")]
+    public Transform bedRobot;
+    public Transform bathRobot;
+    public Transform livingRobot;
 
     private Camera cam;
     private Transform cameraTransform;
     private PlayerController playerController;
     private GameObject currentRobot = null;
-
+    private Transform currentRobotTransform = null;
     private bool chatJustOpened = false;
     private bool isMenuOpen = false;
-    private float inputCooldown = 0f;
     private int currentIndex = 0;
     private Button[] questionButtons;
     private TextMeshProUGUI greetingText;
-    private string originalGreeting = "Hey there! I’m DormE 😊Come closer and press Y to chat with me!";
+    private string originalGreeting = "Hey there! I’m DormE 😊 Come closer and press Y to chat with me!";
     private Coroutine restoreGreetingCoroutine;
+
     [Header("Robot Movement")]
-    public Transform robotTransform;           // Drag your robot model here in Inspector
-    public Vector3 openOffset = new Vector3(-1.5f, 0, 0); // Adjust as needed
+    public Vector3 openOffset = new Vector3(-1.5f, 0, 0);
+    public Vector3 scaledDownScale = new Vector3(0.5f, 0.5f, 0.5f);
     private Vector3 originalRobotPosition;
     private Vector3 originalRobotScale;
-    public Vector3 scaledDownScale = new Vector3(0.5f, 0.5f, 0.5f); // Or tweak as needed
     private Quaternion originalRobotRotation;
-    public Vector3 openRotationEuler = new Vector3(0f, -30f, 0f); // Adjust as needed
-    private GameObject lastInteractedRobot;
+    public Vector3 openRotationEuler = new Vector3(0f, -30f, 0f);
 
     void Start()
     {
@@ -63,10 +69,9 @@ public class RobotChatSpawner : MonoBehaviour
                 break;
             }
         }
+
         if (robotGreetingCanvas != null)
-        {
             greetingText = robotGreetingCanvas.GetComponentInChildren<TextMeshProUGUI>();
-        }
 
         if (robotChatCanvas != null)
         {
@@ -76,12 +81,6 @@ public class RobotChatSpawner : MonoBehaviour
 
             robotChatCanvas.SetActive(false);
         }
-        if (robotTransform != null)
-            originalRobotPosition = robotTransform.position;
-        if (robotTransform != null)
-            originalRobotScale = robotTransform.localScale;
-        if (robotTransform != null)
-            originalRobotRotation = robotTransform.rotation;
 
         GameObject playerObj = GameObject.FindWithTag("Player");
         if (playerObj != null)
@@ -89,10 +88,47 @@ public class RobotChatSpawner : MonoBehaviour
 
         questionButtons = new Button[] { questionButton1, questionButton2, questionButton3, questionButton4 };
 
-        questionButton1.onClick.AddListener(() => ShowAnswer("Hi! I’m DormE, your intelligent assistant in the Dorm Design application. I can explain how everything works, help you navigate the interface, and show you what each component does. Once you've finished arranging your furniture, I can capture your final room setup and provide helpful feedback or suggestions to improve your design."));
-        questionButton2.onClick.AddListener(() => ShowAnswer("💡 I can answer your questions and assist you."));
-        questionButton3.onClick.AddListener(() => ShowAnswer("🎮 Point at me and press Y or R to interact."));
-        questionButton4.onClick.AddListener(() => ShowAnswer("👋 Goodbye!"));
+        questionButton1.onClick.AddListener(() =>
+        {
+            ShowAnswer("Hi! I’m DormE, your intelligent assistant in the Dorm Design application...");
+        });
+
+        questionButton2.onClick.RemoveAllListeners();
+        questionButton2.onClick.AddListener(() =>
+        {
+            string room = GetRoomFromRobotTag(currentRobot);
+            List<string> currentItems = inventoryManager.GetAllPlacedObjectNames();
+            Debug.Log("[CurrentItems Raw] " + string.Join(", ", currentItems));
+
+            string prompt = geminiAgent.BuildRoomInventoryPrompt(room, currentItems, true);
+            geminiAgent.StartCoroutine(geminiAgent.SendPromptRequestToGemini(prompt, false, (response) =>
+            {
+                ShowAnswer(response);
+            }));
+        });
+
+        questionButton3.onClick.RemoveAllListeners();
+        questionButton3.onClick.AddListener(() =>
+        {
+            string room = GetRoomFromRobotTag(currentRobot);
+            List<string> currentItems = inventoryManager.GetAllPlacedObjectNames();
+
+            if (currentItems.Count == 0)
+            {
+                ShowAnswer("You haven’t added anything yet, so there's nothing to remove!");
+                return;
+            }
+
+            Debug.Log("[CurrentItems Raw] " + string.Join(", ", currentItems));
+            string prompt = geminiAgent.BuildRoomInventoryPrompt(room, currentItems, false);
+            geminiAgent.StartCoroutine(geminiAgent.SendPromptRequestToGemini(prompt, false, (response) =>
+            {
+                ShowAnswer(response);
+            }));
+        });
+
+        questionButton4.onClick.AddListener(() => ShowAnswer("The layout includes three rooms: a living room, bedroom, and bathroom..."));
+
         backButton.onClick.AddListener(ShowQuestions);
 
         questionPanel.SetActive(false);
@@ -104,24 +140,26 @@ public class RobotChatSpawner : MonoBehaviour
         if (!isMenuOpen)
         {
             Ray ray = new Ray(cameraTransform.position, cameraTransform.forward);
-
             if (Physics.Raycast(ray, out RaycastHit hit, selectableDistance))
             {
-                if (hit.collider.CompareTag(robotTag))
+                GameObject hitObj = hit.collider.gameObject;
+                if (IsRecognizedRobot(hitObj))
                 {
-                    currentRobot = hit.collider.gameObject;
+                    currentRobot = hitObj;
+                    currentRobotTransform = hitObj.transform;
                 }
                 else
                 {
                     currentRobot = null;
+                    currentRobotTransform = null;
                 }
             }
             else
             {
                 currentRobot = null;
+                currentRobotTransform = null;
             }
         }
-
 
         if (Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.JoystickButton3))
         {
@@ -131,14 +169,7 @@ public class RobotChatSpawner : MonoBehaviour
                 OpenChat();
         }
 
-
         if (!isMenuOpen) return;
-
-        if (inputCooldown > 0f)
-        {
-            inputCooldown -= Time.unscaledDeltaTime;
-            return;
-        }
 
         float vertical = Input.GetAxis("Vertical");
 
@@ -147,7 +178,6 @@ public class RobotChatSpawner : MonoBehaviour
             currentIndex += vertical < 0 ? 1 : -1;
             currentIndex = Mathf.Clamp(currentIndex, 0, questionButtons.Length - 1);
             EventSystem.current.SetSelectedGameObject(questionButtons[currentIndex].gameObject);
-            inputCooldown = 0.3f;
         }
 
         if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.JoystickButton2))
@@ -161,7 +191,6 @@ public class RobotChatSpawner : MonoBehaviour
     {
         isMenuOpen = true;
         chatJustOpened = true;
-        
 
         robotChatCanvas.SetActive(true);
         questionPanel.SetActive(true);
@@ -172,34 +201,30 @@ public class RobotChatSpawner : MonoBehaviour
         robotChatCanvas.transform.position = menuPos;
         robotChatCanvas.transform.rotation = Quaternion.LookRotation(menuPos - cameraTransform.position);
 
-        // 👉 Move robot to the side of the menu based on camera orientation
-        if (robotTransform != null)
+        if (currentRobotTransform != null)
         {
+            originalRobotPosition = currentRobotTransform.position;
+            originalRobotRotation = currentRobotTransform.rotation;
+            originalRobotScale = currentRobotTransform.localScale;
+
             Vector3 rightOffset = cameraTransform.right * openOffset.x +
                                   cameraTransform.up * openOffset.y +
                                   cameraTransform.forward * openOffset.z;
-            robotTransform.position = menuPos + rightOffset;
+            currentRobotTransform.position = menuPos + rightOffset;
+            currentRobotTransform.localScale = scaledDownScale;
+            currentRobotTransform.rotation = Quaternion.Euler(openRotationEuler);
         }
-        if (robotTransform != null)
-            robotTransform.localScale = scaledDownScale;
-        if (robotTransform != null)
-            robotTransform.rotation = Quaternion.Euler(openRotationEuler);
-
-
 
         EventSystem.current.SetSelectedGameObject(questionButtons[0].gameObject);
 
         if (playerController != null)
             playerController.isMovementLocked = true;
 
-        // 👇 Disable greeting canvas if assigned
         if (robotGreetingCanvas != null)
             robotGreetingCanvas.SetActive(false);
-        
 
         Debug.Log("🤖 Robot chat opened.");
     }
-
 
     void CloseChat()
     {
@@ -208,17 +233,17 @@ public class RobotChatSpawner : MonoBehaviour
         questionPanel.SetActive(false);
         answerPanel.SetActive(false);
         EventSystem.current.SetSelectedGameObject(null);
-        
-        robotTransform.position = originalRobotPosition;
+
+        if (currentRobotTransform != null)
+        {
+            currentRobotTransform.position = originalRobotPosition;
+            currentRobotTransform.rotation = originalRobotRotation;
+            currentRobotTransform.localScale = originalRobotScale;
+        }
 
         if (playerController != null)
             playerController.isMovementLocked = false;
-        if (robotTransform != null)
-            robotTransform.position = originalRobotPosition;
-        if (robotTransform != null)
-            robotTransform.rotation = originalRobotRotation;
 
-        // 👇 Re-enable greeting canvas and show "Thank you!" briefly
         if (robotGreetingCanvas != null && greetingText != null)
         {
             robotGreetingCanvas.SetActive(true);
@@ -226,22 +251,19 @@ public class RobotChatSpawner : MonoBehaviour
             if (restoreGreetingCoroutine != null)
                 StopCoroutine(restoreGreetingCoroutine);
 
-            greetingText.text = "Thanks for spending time with me! I had a great chat—hope you had fun too!";
+            greetingText.text = "Thanks for spending time with me!";
             restoreGreetingCoroutine = StartCoroutine(RestoreGreetingTextAfterDelay(3f));
         }
-        if (robotTransform != null)
-            robotTransform.localScale = originalRobotScale;
 
         Debug.Log("❌ Robot chat closed.");
     }
+
     IEnumerator RestoreGreetingTextAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
         if (greetingText != null)
             greetingText.text = originalGreeting;
     }
-
-
 
     void ShowAnswer(string answer)
     {
@@ -250,7 +272,6 @@ public class RobotChatSpawner : MonoBehaviour
         answerText.text = answer;
         EventSystem.current.SetSelectedGameObject(backButton.gameObject);
     }
-    
 
     void ShowQuestions()
     {
@@ -259,4 +280,29 @@ public class RobotChatSpawner : MonoBehaviour
         currentIndex = 0;
         EventSystem.current.SetSelectedGameObject(questionButtons[0].gameObject);
     }
+
+    private string GetRoomFromRobotTag(GameObject robot)
+    {
+        if (robot == null)
+        {
+            Debug.LogWarning("⚠️ Robot is null");
+            return "unknown";
+        }
+
+        string tag = robot.tag.ToLower();
+        Debug.Log("🔍 GetRoomFromRobotTag: " + tag);
+
+        if (tag.Contains("living")) return "living room";
+        if (tag.Contains("bath")) return "bathroom";
+        if (tag.Contains("bed")) return "bedroom";
+
+        return "unknown";
+    }
+
+    private bool IsRecognizedRobot(GameObject obj)
+    {
+        string tag = obj.tag.ToLower();
+        return tag.Contains("robotliving") || tag.Contains("robotbath") || tag.Contains("robotbed");
+    }
+
 }

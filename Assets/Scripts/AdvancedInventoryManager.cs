@@ -18,6 +18,9 @@ public class AdvancedInventoryManager : MonoBehaviour
     private GameObject currentHeldObject;
     private InventoryUIManager uiManager;
 
+    // Track what the user has placed in the scene
+    private List<GameObject> placedObjects = new List<GameObject>();
+
     void Start()
     {
         GameObject gp = GameObject.Find("GrabPoint");
@@ -47,6 +50,13 @@ public class AdvancedInventoryManager : MonoBehaviour
     {
         if (obj == null) return;
 
+        // ✅ Remove from placed list if present
+        if (placedObjects.Contains(obj))
+        {
+            placedObjects.Remove(obj);
+            Debug.Log($"📤 Removed {obj.name} from placedObjects list.");
+        }
+
         obj.SetActive(false);
 
         switch (category)
@@ -59,6 +69,26 @@ public class AdvancedInventoryManager : MonoBehaviour
 
         Debug.Log($"📥 Stored {obj.name} to {category} category.");
     }
+
+    public List<string> GetAllPlacedObjectNames()
+    {
+        placedObjects.RemoveAll(obj => obj == null);  // Clean up any destroyed entries
+
+        List<string> allPlaced = new List<string>();
+        foreach (var obj in placedObjects)
+        {
+            string cleanName = obj.name.Replace("(Clone)", "").Trim();
+            allPlaced.Add(cleanName);
+        }
+        return allPlaced;
+    }
+
+    public List<string> GetAllPlacedObjectRawNames()
+    {
+        placedObjects.RemoveAll(obj => obj == null);
+        return placedObjects.ConvertAll(obj => obj.name);
+    }
+
 
     public void LoadCategory(string category)
     {
@@ -168,10 +198,17 @@ public class AdvancedInventoryManager : MonoBehaviour
                 rb.angularVelocity = Vector3.zero;
             }
 
+            // Track the dropped object
+            if (!placedObjects.Contains(currentHeldObject))
+            {
+                Debug.Log("✅ Adding to placedObjects: " + currentHeldObject.name);
+                placedObjects.Add(currentHeldObject);
+            }
             Debug.Log("📦 Dropped object: " + currentHeldObject.name);
             currentHeldObject = null;
         }
     }
+
 
     public void LoadLivingRoom() => LoadCategory("Living");
     public void LoadBedRoom() => LoadCategory("Bedroom");
