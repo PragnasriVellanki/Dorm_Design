@@ -8,7 +8,7 @@ public class ObjectMenuSpawner : MonoBehaviour
     public Behaviour movementComponent;
     public ReticlePointer reticlePointer;
     public float selectableDistance = 10f;
-    public float verticalOffset = 0.7f; // Adjusted for closer menu position
+    public float verticalOffset = 0.7f; 
 
     public float rotationSpeed = 90f;
     public float repositionSpeed = 2f;
@@ -73,7 +73,7 @@ public class ObjectMenuSpawner : MonoBehaviour
                 if (btn != null)
                 {
                     btn.onClick.Invoke(); // Manually trigger click
-                    Debug.Log($"✅ JS2 triggered: {btn.gameObject.name}");
+                    Debug.Log($"JS2 triggered: {btn.gameObject.name}");
                 }
             }
         }
@@ -129,11 +129,11 @@ public class ObjectMenuSpawner : MonoBehaviour
                 ShowMenuAbove(currentTarget);
                 menuJustOpened = true;
 
-                // ⏸️ Lock movement
+                // Lock movement
                 if (playerController != null)
                     playerController.isMovementLocked = true;
 
-                // ✅ Focus first button
+                // Focus first button
                 Button firstBtn = objectMenu.GetComponentInChildren<Button>();
                 if (firstBtn != null)
                     EventSystem.current.SetSelectedGameObject(firstBtn.gameObject);
@@ -154,7 +154,7 @@ public class ObjectMenuSpawner : MonoBehaviour
         objectMenu.transform.rotation = Quaternion.LookRotation(menuPos - cameraTransform.position);
 
         objectMenu.SetActive(true);
-        Debug.Log("📌 Object Menu spawned at fixed offset above target.");
+        Debug.Log("Object Menu spawned at fixed offset above target.");
     }
 
     public bool IsMenuOpen()
@@ -164,7 +164,7 @@ public class ObjectMenuSpawner : MonoBehaviour
 
     public void CloseMenu()
     {
-        Debug.Log("🛑 Closing Object Menu...");
+        Debug.Log("Closing Object Menu...");
         objectMenu.SetActive(false);
         currentActionMode = ActionMode.None;
         ExitActionMode();

@@ -36,7 +36,7 @@ public class ActionButtonHandler : MonoBehaviour, IPointerEnterHandler, IPointer
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log($"🟣 Hovered: {gameObject.name}");
+        //Debug.Log($"Hovered: {gameObject.name}");
         isHovered = true;
     }
 

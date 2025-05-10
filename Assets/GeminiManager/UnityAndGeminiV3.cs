@@ -84,6 +84,7 @@ public class UnityAndGeminiV3 : MonoBehaviour
     private PlayerController playerController;
     [Header("Greeting Canvas Reference")]
     public RobotStartCanvasController startCanvasController;
+    private bool isFeedbackPopupOpen = false;
 
 
 
@@ -137,18 +138,20 @@ public class UnityAndGeminiV3 : MonoBehaviour
                     allInventoryObjectNames.Add(obj.name);
         }
 
-        AddNames(inventoryManager.bathRoomPrefabs);
-        AddNames(inventoryManager.bedRoomPrefabs);
-        AddNames(inventoryManager.livingRoomPrefabs);
+        allInventoryObjectNames.AddRange(inventoryManager.bathRoomPrefabNames);
+        allInventoryObjectNames.AddRange(inventoryManager.bedRoomPrefabNames);
+        allInventoryObjectNames.AddRange(inventoryManager.livingRoomPrefabNames);
+
     }
 
     private string BuildRoomCommentaryPrompt(string room, List<string> visibleObjects)
     {
         List<string> expected = new List<string>();
 
-        if (room.Contains("bathroom")) expected = inventoryManager.bathRoomPrefabs.ConvertAll(obj => obj.name);
-        else if (room.Contains("bedroom")) expected = inventoryManager.bedRoomPrefabs.ConvertAll(obj => obj.name);
-        else if (room.Contains("living room") || room.Contains("livingroom")) expected = inventoryManager.livingRoomPrefabs.ConvertAll(obj => obj.name);
+        if (room.Contains("bathroom")) expected = inventoryManager.bathRoomPrefabNames;
+        else if (room.Contains("bedroom")) expected = inventoryManager.bedRoomPrefabNames;
+        else if (room.Contains("living room") || room.Contains("livingroom")) expected = inventoryManager.livingRoomPrefabNames;
+
 
         var matched = visibleObjects.FindAll(o => expected.Contains(o));
         var missing = expected.FindAll(o => !visibleObjects.Contains(o));
@@ -251,42 +254,17 @@ public class UnityAndGeminiV3 : MonoBehaviour
 
 
     public List<string> GetExpectedRoomPrefabNames(string room)
-    {
-        List<string> expectedNames = new List<string>();
+{
+    if (room == "bedroom")
+        return new List<string>(inventoryManager.bedRoomPrefabNames);
+    else if (room == "bathroom")
+        return new List<string>(inventoryManager.bathRoomPrefabNames);
+    else if (room == "living room")
+        return new List<string>(inventoryManager.livingRoomPrefabNames);
+    else
+        return new List<string>();
+}
 
-        // Use exact match since GetRoomFromRobotTag() returns exact room names
-        if (room == "bedroom")
-        {
-            foreach (var prefab in inventoryManager.bedRoomPrefabs)
-            {
-                if (prefab != null)
-                    expectedNames.Add(prefab.name.Trim());
-            }
-        }
-        else if (room == "bathroom")
-        {
-            foreach (var prefab in inventoryManager.bathRoomPrefabs)
-            {
-                if (prefab != null)
-                    expectedNames.Add(prefab.name.Trim());
-            }
-        }
-        else if (room == "living room")
-        {
-            foreach (var prefab in inventoryManager.livingRoomPrefabs)
-            {
-                if (prefab != null)
-                    expectedNames.Add(prefab.name.Trim());
-            }
-        }
-        else
-        {
-            Debug.LogWarning("⚠️ No prefab list found for room: " + room);
-        }
-
-        Debug.Log("✅ Prefabs for room [" + room + "]: " + string.Join(", ", expectedNames));
-        return expectedNames;
-    }
 
 
     public string BuildRoomInventoryPrompt(string room, List<string> currentItems, bool isAddPrompt)
@@ -294,9 +272,10 @@ public class UnityAndGeminiV3 : MonoBehaviour
         // 1. Get expected prefab names for the room
         List<string> expectedRaw = new List<string>();
 
-        if (room == "bedroom") expectedRaw = inventoryManager.bedRoomPrefabs.ConvertAll(obj => obj.name);
-        else if (room == "bathroom") expectedRaw = inventoryManager.bathRoomPrefabs.ConvertAll(obj => obj.name);
-        else if (room == "living room") expectedRaw = inventoryManager.livingRoomPrefabs.ConvertAll(obj => obj.name);
+        if (room == "bedroom") expectedRaw = inventoryManager.bedRoomPrefabNames;
+        else if (room == "bathroom") expectedRaw = inventoryManager.bathRoomPrefabNames;
+        else if (room == "living room") expectedRaw = inventoryManager.livingRoomPrefabNames;
+
 
         Debug.Log($"✅ Prefabs for room [{room}]: {string.Join(", ", expectedRaw)}");
         Debug.Log($"📦 Current Placed Items: {string.Join(", ", currentItems)}");
@@ -703,12 +682,18 @@ public class UnityAndGeminiV3 : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.N) || Input.GetKeyDown(KeyCode.JoystickButton11))
         {
-            SendScreenshotToGeminiForRoomCommentary();
-        }
-        else if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.JoystickButton5))
-        {
-            ClosePopup();
+            if (isFeedbackPopupOpen)
+            {
+                ClosePopup();
+            }
+            else
+            {
+                SendScreenshotToGeminiForRoomCommentary();
+            }
+
+            isFeedbackPopupOpen = !isFeedbackPopupOpen;
         }
     }
+
 
 }

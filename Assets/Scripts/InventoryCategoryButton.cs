@@ -16,8 +16,8 @@ public class InventoryCategoryButton : MonoBehaviour, IPointerEnterHandler, IPoi
     public AdvancedInventoryManager inventoryManager;
 
     [Header("Highlight")]
-    public Image buttonImage;                    // Assign your sprite-based image here
-    public Color highlightColor = Color.yellow;  // Customize highlight color
+    public Image buttonImage;                    
+    public Color highlightColor = Color.yellow;  
     private Color originalColor;
 
     private bool isHovered = false;
@@ -27,7 +27,7 @@ public class InventoryCategoryButton : MonoBehaviour, IPointerEnterHandler, IPoi
         if (buttonImage != null)
             originalColor = buttonImage.color;
         else
-            Debug.LogWarning("⚠️ No Button Image assigned on: " + gameObject.name);
+            Debug.LogWarning("No Button Image assigned on: " + gameObject.name);
     }
 
     void Update()
@@ -36,7 +36,7 @@ public class InventoryCategoryButton : MonoBehaviour, IPointerEnterHandler, IPoi
         {
             if (inventoryManager == null)
             {
-                Debug.LogWarning("⚠️ InventoryManager not assigned on: " + gameObject.name);
+                Debug.LogWarning("InventoryManager not assigned on: " + gameObject.name);
                 return;
             }
 

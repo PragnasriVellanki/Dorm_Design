@@ -85,13 +85,13 @@ public class TeleportDoor : MonoBehaviour
 
         if (localPlayer == null)
         {
-            Debug.LogWarning("❌ Could not find local player to teleport.");
+            Debug.LogWarning("Could not find local player to teleport.");
             return;
         }
 
         if (teleportTarget == null)
         {
-            Debug.LogWarning("⚠️ Teleport target not assigned!");
+            Debug.LogWarning("Teleport target not assigned!");
             return;
         }
 
@@ -104,7 +104,7 @@ public class TeleportDoor : MonoBehaviour
 
         if (cc != null) cc.enabled = true;
 
-        Debug.Log("🟢 Teleported local player to: " + teleportTarget.name);
+        Debug.Log("Teleported local player to: " + teleportTarget.name);
     }
 
     void ShowLockedPopup()

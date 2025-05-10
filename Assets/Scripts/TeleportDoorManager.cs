@@ -19,7 +19,7 @@ public class TeleportDoorManager : MonoBehaviour
         }
 
         if (cam == null)
-            Debug.LogError("❌ No local PlayerCamera found in TeleportDoorManager.");
+            Debug.LogError("No local PlayerCamera found in TeleportDoorManager.");
     }
 
 

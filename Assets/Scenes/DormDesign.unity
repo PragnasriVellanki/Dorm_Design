@@ -9819,52 +9819,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46ee6c21b8f0aa348962f27617404a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  livingRoomPrefabs:
-  - {fileID: 7482164321834458666, guid: 3bc36d27fb36c2143af1eb403850a542, type: 3}
-  - {fileID: 5928072239495574611, guid: 932c343dbd0ef0147a583d572e95e58b, type: 3}
-  - {fileID: 8852094465279911410, guid: 3e40bca8db210f947adaa5d227fa8f6b, type: 3}
-  - {fileID: 7405838858727382534, guid: 6d06f861e7132264aa7aa628258e70c9, type: 3}
-  - {fileID: 8108054837608305370, guid: 898fd78874ed4fd4696de421d80e4d8f, type: 3}
-  - {fileID: 9040554876290576663, guid: 396d07c3645624241ace99abaeb6d520, type: 3}
-  - {fileID: 8617174972348967542, guid: 0e717faa5274daf4e88e296b99f69687, type: 3}
-  - {fileID: 3782551888963244195, guid: f387079a14e45fc4bbfd884a1e7f69f5, type: 3}
-  - {fileID: 1585560560081108179, guid: cbb101066286a4d4988a8886ded30e67, type: 3}
-  - {fileID: 7413652023988646185, guid: 3f2b5850f354baa4ba3d794b4939b879, type: 3}
-  - {fileID: 7497851449543707673, guid: e926a1146adc61d4ba6ba0270ee0e09a, type: 3}
-  - {fileID: 5979167654069592403, guid: d1ac8a960c65760428fbca843114e4f9, type: 3}
-  - {fileID: 8227269121097586294, guid: f0953a97f427a7f46b4a4c6f44cbdc79, type: 3}
-  - {fileID: 7217670036407768561, guid: 658776daa5d72d4419285ae401149676, type: 3}
-  - {fileID: 7312628443597218575, guid: 16dc4a415aa867240bb05bb29dfbcc68, type: 3}
-  - {fileID: 3973846635314511830, guid: ab4bb5778e2aea64d8afbe6ccff09798, type: 3}
-  - {fileID: 2749326296456807324, guid: c521333f6e9337945a34a65d021d88ce, type: 3}
-  bedRoomPrefabs:
-  - {fileID: 1331985440634909632, guid: fe954353996d1be409565eddd052a11f, type: 3}
-  - {fileID: 7182004819003657409, guid: a27ebda50ef194146a054b3b6cebb4ce, type: 3}
-  - {fileID: 4288619479168384684, guid: c485c5b5b45a4854b98c3403d6b784a3, type: 3}
-  - {fileID: 8326258620226728077, guid: 240f7589f1669a64890f903925a3a001, type: 3}
-  - {fileID: 2153323984110181769, guid: ab4f2aa8e5463214390b9a543c4848b0, type: 3}
-  - {fileID: 3784001720782453869, guid: d0a8bc4e217d52847b8990d03d52174e, type: 3}
-  - {fileID: 925309599372099255, guid: b3d93e3cc5d3334488ca2822468244a3, type: 3}
-  - {fileID: 1478585657251827098, guid: f4d52c15b282b324d8a85c9993eb36a3, type: 3}
-  - {fileID: 7436512195788132801, guid: 0c706a1d88fef0e4c96341faa2a4ff23, type: 3}
-  - {fileID: 1670029213368841827, guid: ab68eec296106bc488f0fb51fb175389, type: 3}
-  - {fileID: 6602491243328212773, guid: b86b4db3613b6c34db8159dee086b52b, type: 3}
-  - {fileID: 6780511906352654198, guid: 798cdb91a0e769b4e98951f3aac351b9, type: 3}
-  - {fileID: 1135649482684747109, guid: ef235f10188ca0240bd8e6a7d4e29d64, type: 3}
-  - {fileID: 1157308512712802934, guid: a49b32dc9efad8f4b8e5e16c67a9873f, type: 3}
-  - {fileID: 5637405974644548247, guid: 0f92be68b353738408865a535490c198, type: 3}
-  - {fileID: 532524636771926215, guid: bc96a176a96d2ad4f9a0c97e053d764b, type: 3}
-  - {fileID: 357457667628346465, guid: 8fa2124e52ae2ad4e8cd2ea99f019894, type: 3}
-  bathRoomPrefabs:
-  - {fileID: 5310329695600108768, guid: da31803eeee04a6439edc36a95f4378e, type: 3}
-  - {fileID: 1950873820442947004, guid: f44d931be73253742af7f6eaeeabcd28, type: 3}
-  - {fileID: 8182100640299679608, guid: 83f324328aa642d4b95ca75262ab00ec, type: 3}
-  - {fileID: 556140282984196197, guid: 68d220a65d615a245bdaea7641253539, type: 3}
-  - {fileID: 8383690479356465971, guid: 387da3a749befca4fb8e7bd6efd1c3cf, type: 3}
-  - {fileID: 1020223823490680294, guid: 1a993766383113d43b75c250fed3bedc, type: 3}
-  - {fileID: 79334585359512209, guid: dc3aef706a06d0f4f8a08cc19191ab65, type: 3}
-  - {fileID: 8113386213630548666, guid: 7e2106ef1068bf84688510cc18d86bc2, type: 3}
-  - {fileID: 8631641884575415984, guid: c37ec82a1cd565f49a1171702fb5821e, type: 3}
+  livingRoomPrefabNames: []
+  bedRoomPrefabNames: []
+  bathRoomPrefabNames: []
   inventoryContentParent: {fileID: 64934038}
   inventorySlotButtonPrefab: {fileID: 2636020652674061537, guid: 87d6152c4283e6a4382c29df67fc5da5, type: 3}
 --- !u!4 &1567997289
@@ -11962,7 +11919,7 @@ Transform:
   m_GameObject: {fileID: 1794699836}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.64, y: 0, z: 0.18}
+  m_LocalPosition: {x: -2.64, y: 0, z: 1.98}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

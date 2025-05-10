@@ -24,7 +24,7 @@ public class OutlineSelection : MonoBehaviour
 
         outline.enabled = false;
 
-        // ✅ Assign the correct local PlayerCamera
+        // Assign the correct local PlayerCamera
         Camera[] allCams = Object.FindObjectsByType<Camera>(FindObjectsSortMode.None);
         foreach (Camera cam in allCams)
         {

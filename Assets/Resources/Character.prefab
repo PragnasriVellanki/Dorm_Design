@@ -178,7 +178,7 @@ MonoBehaviour:
   prefixField: -1
   Synchronization: 3
   OwnershipTransfer: 0
-  observableSearch: 2
+  observableSearch: 0
   ObservedComponents:
   - {fileID: 2643721713429036543}
   - {fileID: 4843276042897791291}
@@ -212,7 +212,7 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
-  m_UseLocal: 0
+  m_UseLocal: 1
 --- !u!114 &6224501380925830243
 MonoBehaviour:
   m_ObjectHideFlags: 0

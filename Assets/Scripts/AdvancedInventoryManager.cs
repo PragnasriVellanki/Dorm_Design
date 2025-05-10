@@ -2,13 +2,14 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.Collections;
 
 public class AdvancedInventoryManager : MonoBehaviour
 {
-    [Header("Prefabs by Category")]
-    public List<GameObject> livingRoomPrefabs;
-    public List<GameObject> bedRoomPrefabs;
-    public List<GameObject> bathRoomPrefabs;
+    [Header("Prefabs by Category (Auto-loaded at runtime)")]
+    public List<string> livingRoomPrefabNames;
+    public List<string> bedRoomPrefabNames;
+    public List<string> bathRoomPrefabNames;
 
     [Header("Inventory Grid Setup")]
     public Transform inventoryContentParent;
@@ -16,21 +17,45 @@ public class AdvancedInventoryManager : MonoBehaviour
 
     private Transform grabPoint;
     private GameObject currentHeldObject;
-    private InventoryUIManager uiManager;
+    private AdvancedInventoryUIController uiController;
 
-    // Track what the user has placed in the scene
+
     private List<GameObject> placedObjects = new List<GameObject>();
+    private Dictionary<string, string> prefabPathMap = new Dictionary<string, string>();
 
     void Start()
     {
         GameObject gp = GameObject.Find("GrabPoint");
-        if (gp != null)
-            grabPoint = gp.transform;
-        else
-            Debug.LogWarning("❌ GrabPoint not found.");
+        if (gp != null) grabPoint = gp.transform;
+
+        uiController = UnityEngine.Object.FindFirstObjectByType<AdvancedInventoryUIController>();
+
+
+        // ✅ Auto-load prefab names from flat Prefabs folder and categorize by name
+        CategorizePrefabs("Prefabs");
 
         LoadCategory("Living");
-        uiManager = UnityEngine.Object.FindFirstObjectByType<InventoryUIManager>();
+    }
+
+    private void CategorizePrefabs(string path)
+    {
+        GameObject[] prefabs = Resources.LoadAll<GameObject>(path);
+        foreach (GameObject prefab in prefabs)
+        {
+            if (prefab == null) continue;
+
+            string name = prefab.name;
+            prefabPathMap[name] = path + "/" + name;
+
+            if (name.StartsWith("Bed_"))
+                bedRoomPrefabNames.Add(name);
+            else if (name.StartsWith("Bath_"))
+                bathRoomPrefabNames.Add(name);
+            else
+                livingRoomPrefabNames.Add(name);
+        }
+
+        Debug.Log($"✅ Loaded {livingRoomPrefabNames.Count} Living, {bedRoomPrefabNames.Count} Bedroom, {bathRoomPrefabNames.Count} Bathroom prefabs.");
     }
 
     void Update()
@@ -49,38 +74,27 @@ public class AdvancedInventoryManager : MonoBehaviour
     public void StoreObject(GameObject obj, string category)
     {
         if (obj == null) return;
-
-        // ✅ Remove from placed list if present
-        if (placedObjects.Contains(obj))
-        {
-            placedObjects.Remove(obj);
-            Debug.Log($"📤 Removed {obj.name} from placedObjects list.");
-        }
+        if (placedObjects.Contains(obj)) placedObjects.Remove(obj);
 
         obj.SetActive(false);
+        string prefabName = obj.name.Replace("(Clone)", "").Trim();
 
         switch (category)
         {
-            case "Living": livingRoomPrefabs.Add(obj); break;
-            case "Bedroom": bedRoomPrefabs.Add(obj); break;
-            case "Bathroom": bathRoomPrefabs.Add(obj); break;
-            default: livingRoomPrefabs.Add(obj); break;
+            case "Living": if (!livingRoomPrefabNames.Contains(prefabName)) livingRoomPrefabNames.Add(prefabName); break;
+            case "Bedroom": if (!bedRoomPrefabNames.Contains(prefabName)) bedRoomPrefabNames.Add(prefabName); break;
+            case "Bathroom": if (!bathRoomPrefabNames.Contains(prefabName)) bathRoomPrefabNames.Add(prefabName); break;
+            default: if (!livingRoomPrefabNames.Contains(prefabName)) livingRoomPrefabNames.Add(prefabName); break;
         }
-
-        Debug.Log($"📥 Stored {obj.name} to {category} category.");
     }
 
     public List<string> GetAllPlacedObjectNames()
     {
-        placedObjects.RemoveAll(obj => obj == null);  // Clean up any destroyed entries
-
-        List<string> allPlaced = new List<string>();
+        placedObjects.RemoveAll(obj => obj == null);
+        List<string> names = new List<string>();
         foreach (var obj in placedObjects)
-        {
-            string cleanName = obj.name.Replace("(Clone)", "").Trim();
-            allPlaced.Add(cleanName);
-        }
-        return allPlaced;
+            names.Add(obj.name.Replace("(Clone)", "").Trim());
+        return names;
     }
 
     public List<string> GetAllPlacedObjectRawNames()
@@ -89,24 +103,35 @@ public class AdvancedInventoryManager : MonoBehaviour
         return placedObjects.ConvertAll(obj => obj.name);
     }
 
-
     public void LoadCategory(string category)
     {
         foreach (Transform child in inventoryContentParent)
-        {
             Destroy(child.gameObject);
-        }
 
-        List<GameObject> prefabs = category switch
+        List<string> prefabNames = category switch
         {
-            "Living" => livingRoomPrefabs,
-            "Bedroom" => bedRoomPrefabs,
-            "Bathroom" => bathRoomPrefabs,
-            _ => new List<GameObject>()
+            "Living" => livingRoomPrefabNames,
+            "Bedroom" => bedRoomPrefabNames,
+            "Bathroom" => bathRoomPrefabNames,
+            _ => new List<string>()
         };
 
-        foreach (GameObject prefab in prefabs)
+        foreach (string prefabName in prefabNames)
         {
+            GameObject prefab = null;
+            if (prefabPathMap.TryGetValue(prefabName, out string fullPath))
+                prefab = Resources.Load<GameObject>(fullPath);
+
+            if (prefab == null)
+            {
+                Debug.LogWarning($"❌ Could not load prefab: {prefabName}");
+                continue;
+            }
+            else
+            {
+                Debug.Log($"✅ Loaded prefab: {prefabName}");
+            }
+
             GameObject buttonObj = Instantiate(inventorySlotButtonPrefab, inventoryContentParent);
             Button btn = buttonObj.GetComponent<Button>();
 
@@ -115,17 +140,10 @@ public class AdvancedInventoryManager : MonoBehaviour
             if (img != null && thumb != null && thumb.thumbnail != null)
                 img.sprite = thumb.thumbnail;
 
-            GameObject capturedPrefab = prefab;
-            btn.onClick.AddListener(() =>
-            {
-                livingRoomPrefabs.Remove(capturedPrefab);
-                bedRoomPrefabs.Remove(capturedPrefab);
-                bathRoomPrefabs.Remove(capturedPrefab);
-                GrabObject(capturedPrefab, null);
-            });
+            btn.onClick.AddListener(() => { GrabObject(prefabName); });
         }
 
-        if (uiManager != null)
+        if (uiController != null)
         {
             List<Button> allButtons = new List<Button>();
             foreach (Transform child in inventoryContentParent)
@@ -133,55 +151,41 @@ public class AdvancedInventoryManager : MonoBehaviour
                 Button b = child.GetComponent<Button>();
                 if (b != null) allButtons.Add(b);
             }
-            uiManager.SetInventoryButtons(allButtons);
+            uiController.SetInventoryButtons(allButtons);
         }
+
     }
 
-    private void GrabObject(GameObject prefab, List<GameObject> sourceList)
+    private void GrabObject(string prefabName)
     {
-        if (grabPoint != null)
+        if (grabPoint == null) return;
+
+        if (currentHeldObject != null)
+            Destroy(currentHeldObject);
+
+        GameObject prefab = Resources.Load<GameObject>("Prefabs/" + prefabName);
+        if (prefab == null)
         {
-            if (currentHeldObject != null)
-                Destroy(currentHeldObject);
-
-            currentHeldObject = Instantiate(prefab);
-            currentHeldObject.transform.SetParent(null);
-            currentHeldObject.transform.SetParent(grabPoint, false);
-            currentHeldObject.transform.localScale = Vector3.one;
-            currentHeldObject.transform.localPosition = Vector3.zero;
-            currentHeldObject.transform.localRotation = Quaternion.identity;
-
-            Vector3 globalScale = currentHeldObject.transform.lossyScale;
-            float correctionFactor = 1f / globalScale.x;
-            currentHeldObject.transform.localScale *= correctionFactor;
-
-            Rigidbody rb = currentHeldObject.GetComponent<Rigidbody>();
-            if (rb != null) rb.isKinematic = true;
-
-            Debug.Log($"🛠️ Grabbed object: {currentHeldObject.name}");
-
-            GameObject canvas = GameObject.Find("InventoryCanvas");
-            if (canvas != null) canvas.SetActive(false);
-
-            GameObject player = GameObject.FindWithTag("Player");
-            if (player != null)
-            {
-                PlayerController pc = player.GetComponent<PlayerController>();
-                if (pc != null)
-                {
-                    pc.isMovementLocked = false;
-                    Debug.Log("🎮 Player movement unlocked after grabbing.");
-                }
-            }
-
-            AdvancedInventoryUIController uiController = UnityEngine.Object.FindFirstObjectByType<AdvancedInventoryUIController>();
-            if (uiController != null)
-            {
-                uiController.CloseInventoryExternally();
-                Debug.Log("📂 InventoryOpen flag reset via public method.");
-            }
+            Debug.LogError($"❌ Failed to load prefab: {prefabName}");
+            return;
         }
+
+        currentHeldObject = Instantiate(prefab, grabPoint.position, Quaternion.identity);
+        currentHeldObject.transform.SetParent(grabPoint, false);
+        currentHeldObject.transform.localPosition = Vector3.zero;
+        currentHeldObject.transform.localRotation = Quaternion.identity;
+        currentHeldObject.transform.localScale = Vector3.one * 2f; 
+
+
+        Rigidbody rb = currentHeldObject.GetComponent<Rigidbody>();
+        if (rb != null) rb.isKinematic = true;
+
+        // ✅ Close inventory after grabbing
+        if (uiController != null)
+            uiController.CloseInventoryExternally();
+
     }
+
 
     void DropHeldObject()
     {
@@ -198,17 +202,12 @@ public class AdvancedInventoryManager : MonoBehaviour
                 rb.angularVelocity = Vector3.zero;
             }
 
-            // Track the dropped object
             if (!placedObjects.Contains(currentHeldObject))
-            {
-                Debug.Log("✅ Adding to placedObjects: " + currentHeldObject.name);
                 placedObjects.Add(currentHeldObject);
-            }
-            Debug.Log("📦 Dropped object: " + currentHeldObject.name);
+
             currentHeldObject = null;
         }
     }
-
 
     public void LoadLivingRoom() => LoadCategory("Living");
     public void LoadBedRoom() => LoadCategory("Bedroom");

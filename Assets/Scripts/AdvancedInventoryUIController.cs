@@ -1,11 +1,12 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class AdvancedInventoryUIController : MonoBehaviour
 {
     [Header("Canvas & Category Buttons")]
-    public GameObject inventoryCanvas;                 // ✅ Drag here
+    public GameObject inventoryCanvas;                 
     public Button livingRoomButton;
     public Button bedRoomButton;
     public Button bathRoomButton;
@@ -21,7 +22,7 @@ public class AdvancedInventoryUIController : MonoBehaviour
     public ObjectMenuSpawner objectMenuSpawner;
     void Start()
     {
-        Debug.Log("📦 Inventory UI Controller started.");
+        //Debug.Log("Inventory UI Controller started.");
 
         // Find the InventoryCanvas if not assigned
         if (inventoryCanvas == null)
@@ -29,7 +30,7 @@ public class AdvancedInventoryUIController : MonoBehaviour
             inventoryCanvas = GameObject.Find("InventoryCanvas");
             if (inventoryCanvas == null)
             {
-                Debug.LogError("❌ InventoryCanvas not found!");
+                //Debug.LogError("InventoryCanvas not found!");
                 return;
             }
         }
@@ -38,14 +39,11 @@ public class AdvancedInventoryUIController : MonoBehaviour
         if (playerObj != null)
         {
             playerController = playerObj.GetComponent<PlayerController>();
-            if (playerController != null)
-                Debug.Log("✅ Found PlayerController.");
-            else
-                Debug.LogWarning("⚠️ PlayerController not found on Player.");
+            
         }
 
         // Find the Main Camera from the spawned player
-        // ✅ Modern Unity-safe camera assignment
+        
         if (mainCamera == null)
         {
             Camera[] allCameras = Object.FindObjectsByType<Camera>(FindObjectsSortMode.None);
@@ -54,14 +52,14 @@ public class AdvancedInventoryUIController : MonoBehaviour
                 if (cam.CompareTag("PlayerCamera") && cam.gameObject.activeInHierarchy)
                 {
                     mainCamera = cam;
-                    Debug.Log("✅ Main Camera assigned from PlayerCamera tag.");
+                    //Debug.Log("Main Camera assigned from PlayerCamera tag.");
                     break;
                 }
             }
 
             if (mainCamera == null)
             {
-                Debug.LogError("❌ No active PlayerCamera found!");
+                Debug.LogError("No active PlayerCamera found!");
             }
         }
 
@@ -71,7 +69,7 @@ public class AdvancedInventoryUIController : MonoBehaviour
         if (canvas != null && mainCamera != null)
         {
             canvas.worldCamera = mainCamera;
-            Debug.Log("🎥 Event camera set to Main Camera.");
+            Debug.Log("Event camera set to Main Camera.");
         }
         livingRoomButton.onClick.AddListener(() => categoryManager.LoadLivingRoom());
         bedRoomButton.onClick.AddListener(() => categoryManager.LoadBedRoom());
@@ -87,7 +85,7 @@ public class AdvancedInventoryUIController : MonoBehaviour
     {
         if ((Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.JoystickButton7)) && inputReady)
         {
-            Debug.Log("🎮 Toggle Inventory Triggered.");
+            Debug.Log("Toggle Inventory Triggered.");
             ToggleInventory();
             inputReady = false;
             Invoke(nameof(ResetInput), 0.25f);
@@ -97,7 +95,7 @@ public class AdvancedInventoryUIController : MonoBehaviour
     void ToggleInventory()
     {
         inventoryOpen = !inventoryOpen;
-        Debug.Log("📂 Inventory Open: " + inventoryOpen);
+        Debug.Log("Inventory Open: " + inventoryOpen);
         if (inventoryOpen) CloseObjectMenuIfOpen();
         if (inventoryCanvas != null)
         {
@@ -105,7 +103,7 @@ public class AdvancedInventoryUIController : MonoBehaviour
 
             if (inventoryOpen && mainCamera != null)
             {
-                // ✅ Position the canvas in front of the player
+                // Position the canvas in front of the player
                 Vector3 forward = mainCamera.transform.forward;
                 inventoryCanvas.transform.position = mainCamera.transform.position + forward * 4f;
                 inventoryCanvas.transform.rotation = Quaternion.LookRotation(forward);
@@ -115,26 +113,26 @@ public class AdvancedInventoryUIController : MonoBehaviour
             {
                 EventSystem.current.SetSelectedGameObject(null);
                 EventSystem.current.SetSelectedGameObject(livingRoomButton.gameObject);
-                Debug.Log("✅ Living Room Button Selected.");
+                Debug.Log("Living Room Button Selected.");
             }
 
             if (playerController != null)
             {
                 playerController.isMovementLocked = true;
-                Debug.Log("🎮 Player movement locked: True");
+                Debug.Log("Player movement locked: True");
             }
         }
 
         if (!inventoryOpen && playerController != null)
         {
             playerController.isMovementLocked = false;
-            Debug.Log("🎮 Player movement locked: False");
+            Debug.Log("Player movement locked: False");
         }
 
         if (!inventoryOpen)
         {
             EventSystem.current.SetSelectedGameObject(null);
-            Debug.Log("🔄 Inventory closed and selection cleared.");
+            Debug.Log("Inventory closed and selection cleared.");
         }
     }
     public void CloseInventoryExternally()
@@ -148,20 +146,42 @@ public class AdvancedInventoryUIController : MonoBehaviour
             playerController.isMovementLocked = false;
 
         EventSystem.current.SetSelectedGameObject(null);
-        Debug.Log("📂 Inventory closed externally.");
+        Debug.Log("Inventory closed externally.");
     }
     public void CloseObjectMenuIfOpen()
     {
-        Debug.Log("🔁 Checking if Object Menu is open to close...");
+        Debug.Log("Checking if Object Menu is open to close...");
         if (objectMenuSpawner != null && objectMenuSpawner.IsMenuOpen())
         {
-            Debug.Log("✅ Object Menu was open. Closing it.");
+            Debug.Log("Object Menu was open. Closing it.");
             objectMenuSpawner.CloseMenu();
         }
         else
         {
-            Debug.Log("ℹ️ Object Menu is already closed.");
+            Debug.Log("Object Menu is already closed.");
         }
+    }
+    public void SetInventoryButtons(List<Button> buttons)
+    {
+        if (buttons == null || buttons.Count == 0) return;
+
+        // Setup vertical navigation between buttons
+        for (int i = 0; i < buttons.Count; i++)
+        {
+            Navigation nav = buttons[i].navigation;
+            nav.mode = Navigation.Mode.Explicit;
+
+            if (i > 0)
+                nav.selectOnUp = buttons[i - 1];
+            if (i < buttons.Count - 1)
+                nav.selectOnDown = buttons[i + 1];
+
+            buttons[i].navigation = nav;
+        }
+
+        // Select the first button
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(buttons[0].gameObject);
     }
 
     void ResetInput()
